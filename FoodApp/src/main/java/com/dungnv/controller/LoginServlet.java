@@ -17,7 +17,7 @@ import com.dungnv.model.User;
 @WebServlet(urlPatterns = {"/login"})
 public class LoginServlet extends HttpServlet {
 	private UserDAO userDAO;
-	
+
 	@Override
 	public void init() throws ServletException {
 		userDAO = new UserDAO();

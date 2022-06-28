@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dungnv.dao.UserDAO;
-import com.dungnv.model.InvalidAttributeException;
 import com.dungnv.model.User;
 
 @WebServlet(urlPatterns = {"/register"})
