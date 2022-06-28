@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.dungnv.model.User;
+import com.oracle.wls.shaded.org.apache.regexp.recompile;
 
 public class UserDAO {
 	private static String URL = "jdbc:mysql://localhost:3306/food_app";
@@ -15,6 +16,8 @@ public class UserDAO {
 	private static String password = "nguyenvandung";
 	
 	private String SELECT_USER = "SELECT * FROM food_app.user WHERE phone_number = ?;";
+	private String INSERT_USER = "INSERT INTO food_app.user(username,password,phone_number,address)"
+			+ " VALUE(?,?,?,?);"; 
 	
 	public static Connection getConnection() {
 		try {
@@ -27,7 +30,6 @@ public class UserDAO {
 	}
 
 	public boolean checkAccount(User user) {
-		ArrayList<User> users = new ArrayList<>();
 		Connection con = getConnection();
 		try {
 			PreparedStatement preparedStatement = con.prepareStatement(SELECT_USER);
@@ -39,7 +41,7 @@ public class UserDAO {
 				String password = resultSet.getString("password");
 				User user1 = new User(phone, password);
 				if (user.getPhoneNumber().equals(user1.getPhoneNumber())
-						&& user.getPhoneNumber().equals(user1.getPhoneNumber())){
+						&& user.getPassword().equals(user1.getPassword())){
 					return true;
 				}
 			}
@@ -48,5 +50,20 @@ public class UserDAO {
 		}
 		return false;
 	}
-	
+
+	public int addUser(User user) {
+		Connection con = getConnection();
+		try {
+			PreparedStatement preparedStatement = con.prepareStatement(INSERT_USER);
+			preparedStatement.setString(1, user.getUsername());
+			preparedStatement.setString(2, user.getPassword());
+			preparedStatement.setString(3, user.getPhoneNumber());
+			preparedStatement.setString(4, user.getAddress());
+			System.out.println(preparedStatement);
+			return preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+}
 }

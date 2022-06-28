@@ -26,10 +26,10 @@
                     <h2 class="Login-content-h2">JOIN WITH US! </h2>
                     <div class="Login_msg">
                         Bạn chưa có tài khoản?
-                        <span> <a class="Go_register"  href="register.html"> Đăng ký</a></span>
+                        <span> <a class="Go_register"  href="register.jsp"> Đăng ký</a></span>
                     </div>
 
-                    <form action="${pageContext.request.contextPath }/login" method="post" onsubmit="return Checkformlogin()">
+                    <form action="${pageContext.request.contextPath }/login" method="post">
                         <div class="Login-form-content">
                             
                             <label class="label-field" for="phoneNumber">Số điện thoại</label> <br>

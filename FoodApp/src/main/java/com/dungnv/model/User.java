@@ -1,6 +1,8 @@
 package com.dungnv.model;
 
 import java.io.Serializable;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -30,6 +32,16 @@ public class User implements Serializable {
 		this.phoneNumber = phoneNumber;
 		this.address = address;
 	}
+	
+
+	public User(String phoneNumber, String username,
+			String password, String address) {
+		this.phoneNumber = phoneNumber;
+		this.username = username;
+		this.password = password;
+		this.address = address;
+	}
+
 
 	public Integer getUserID() {
 		return userID;
