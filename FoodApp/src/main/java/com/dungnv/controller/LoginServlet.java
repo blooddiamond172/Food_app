@@ -24,15 +24,18 @@ public class LoginServlet extends HttpServlet {
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		ArrayList<User> users = new ArrayList<>();
 		String phoneNumber = req.getParameter("phoneNumber");
 		String password = req.getParameter("password");
-		User user = new User(phoneNumber, password);
-		boolean result = userDAO.checkAccount(user);
-		if (result) {
-			req.getSession().setAttribute("password", password);
-			req.getRequestDispatcher("index.jsp").forward(req, resp);
-		} else {
-			req.getRequestDispatcher("login.jsp").forward(req, resp);
+		users = userDAO.checkAccount(phoneNumber);
+		for (User user : users) {
+			if (phoneNumber.equals(user.getPhoneNumber()) && 
+					password.equals(user.getPassword())) {
+				req.getSession().setAttribute("password", password);
+				req.getRequestDispatcher("index.jsp").forward(req, resp);
+				return;
+			}
 		}
+		req.getRequestDispatcher("login.jsp").forward(req, resp);
 	}
 }

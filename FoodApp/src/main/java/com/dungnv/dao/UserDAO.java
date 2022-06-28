@@ -1,5 +1,6 @@
 package com.dungnv.dao;
 
+import java.lang.ref.PhantomReference;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -29,26 +30,24 @@ public class UserDAO {
 		return null;
 	}
 
-	public boolean checkAccount(User user) {
+	public ArrayList<User> checkAccount(String phone) {
+		ArrayList<User> users = new ArrayList<>();
 		Connection con = getConnection();
 		try {
 			PreparedStatement preparedStatement = con.prepareStatement(SELECT_USER);
-			preparedStatement.setString(1, user.getPhoneNumber());
+			preparedStatement.setString(1, phone);
 			System.out.println(preparedStatement);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
-				String phone = resultSet.getString("phone_number");
+				String phoneNumber = resultSet.getString("phone_number");
 				String password = resultSet.getString("password");
-				User user1 = new User(phone, password);
-				if (user.getPhoneNumber().equals(user1.getPhoneNumber())
-						&& user.getPassword().equals(user1.getPassword())){
-					return true;
-				}
+				User user = new User(phoneNumber, password);
+				users.add(user);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return false;
+		return users;
 	}
 
 	public int addUser(User user) {
