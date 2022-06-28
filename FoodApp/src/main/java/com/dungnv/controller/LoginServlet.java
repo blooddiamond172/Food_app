@@ -27,7 +27,7 @@ public class LoginServlet extends HttpServlet {
 		ArrayList<User> users = new ArrayList<>();
 		String phoneNumber = req.getParameter("phoneNumber");
 		String password = req.getParameter("password");
-		users = userDAO.checkAccount(phoneNumber);
+		users = userDAO.getUserList(phoneNumber);
 		for (User user : users) {
 			if (phoneNumber.equals(user.getPhoneNumber()) && 
 					password.equals(user.getPassword())) {

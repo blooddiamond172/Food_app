@@ -30,7 +30,7 @@ public class UserDAO {
 		return null;
 	}
 
-	public ArrayList<User> checkAccount(String phone) {
+	public ArrayList<User> getUserList(String phone) {
 		ArrayList<User> users = new ArrayList<>();
 		Connection con = getConnection();
 		try {
