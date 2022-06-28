@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dungnv.dao.UserDAO;
+import com.dungnv.model.InvalidAttributeException;
 import com.dungnv.model.User;
 
 @WebServlet(urlPatterns = {"/register"})
@@ -36,12 +37,14 @@ public class RegisterServlet extends HttpServlet {
 			Pattern pattern1 = Pattern.compile(reg);
 			Matcher matcher = pattern.matcher(phoneNumber);
 			Matcher matcher1 = pattern1.matcher(password);
-			if (matcher.matches() && matcher1.matches()) {
-				User user = new User(phoneNumber,username,password,address);
-				int result = userDAO.addUser(user);
-				if (result != 0) {
-					req.getRequestDispatcher("index.jsp").forward(req, resp);
-					return;
+			if (matcher.matches()) {
+				if (matcher1.matches()) {
+					User user = new User(phoneNumber,username,password,address);
+					int result = userDAO.addUser(user);
+					if (result != 0) {
+						req.getRequestDispatcher("index.jsp").forward(req, resp);
+						return;
+					}
 				}
 			}
 		}
