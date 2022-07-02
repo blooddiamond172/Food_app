@@ -6,5 +6,6 @@
     <welcome-file>login.jsp</welcome-file>
     <welcome-file>app.js</welcome-file>
     <welcome-file>register.jsp</welcome-file>
+    <welcome-file>product.jsp</welcome-file>
   </welcome-file-list>
 </web-app>

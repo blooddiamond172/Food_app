@@ -19,7 +19,15 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Windown/Downloads/jakarta.servlet.jsp.jstl-1.2.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Windown/Downloads/jakarta.servlet.jsp.jstl-api-1.2.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Windown/Downloads/jakarta.servlet.jsp.jstl-1.2.6.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Windown/Downloads/jakarta.servlet.jsp.jstl-api-1.2.7.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

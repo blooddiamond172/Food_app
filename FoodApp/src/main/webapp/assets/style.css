@@ -425,7 +425,6 @@ background-image: url(/assets/img/banner-st.57953e4d.jpg);
 
 .Shop{
     display: flex;
-    justify-content: space-around;
     flex-wrap: wrap;
     /* background-color: aqua; */
     height: 700px;
@@ -435,6 +434,7 @@ background-image: url(/assets/img/banner-st.57953e4d.jpg);
     width: 270px;
     height: 260px;
     position: relative;
+    margin: 10px 10px;
 }
 
 .shop-product-description-fav{
