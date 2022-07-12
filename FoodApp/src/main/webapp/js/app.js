@@ -1,5 +1,4 @@
 
-// Setup Nav and footer all website
 $(function () {
     document.querySelector(".Nav_pc").innerHTML = `
   <div class="Nav_pc_all"> 
@@ -15,7 +14,7 @@ $(function () {
       <div class="Nav_right">
           <ul class="Nav_right_ul">
               <li><a href="Cart.html"><i class="fas fa-shopping-cart"></i></a></li>
-              <li><a href="login.jsp"><i class="fas fa-user"></i>Đăng nhập</a></li>
+              <li><a href="login.jsp"><i class="fas fa-user"></i>${window.localStorage.getItem('user')}</a></li>
           </ul>
       </div>
     </div> 

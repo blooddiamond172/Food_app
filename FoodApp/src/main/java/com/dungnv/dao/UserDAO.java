@@ -39,9 +39,10 @@ public class UserDAO {
 			System.out.println(preparedStatement);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
+				Integer userID = resultSet.getInt("user_id");
 				String phoneNumber = resultSet.getString("phone_number");
 				String password = resultSet.getString("password");
-				User user = new User(phoneNumber, password);
+				User user = new User(userID, password, phoneNumber);
 				users.add(user);
 			}
 		} catch (SQLException e) {

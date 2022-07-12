@@ -84,12 +84,13 @@
                 </div>
             </div>
 
-            <div class="detail-tab-comment"> 
+            <c:forEach var="comment" items="${comments }">
+            	<div class="detail-tab-comment"> 
                 <div class="detail-tab-comment__customer">
                     <div class="MuiAvatar-root MuiAvatar-circle detail-tab-comment__customer-avatar">
                         <img alt="hình đại diện" src="assets/img/drinks_boba-tea-kit.avif" class="MuiAvatar-img"></div><div class="detail-tab-comment__wrapper">
                             <div class="detail-tab-comment__row"><h4 class="detail-tab-comment__name">
-                                <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nguyễn Văn ABC</font></font></h4>
+                                <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> <c:out value="${comment.userID }"></c:out> </font></font></h4>
                                 <time class="detail-tab-comment__date" datetime="2022-05-26T13:20:45.844Z" title="2022-05-26 13:20">
                                     <font style="vertical-align: inherit;">
                                         <font style="vertical-align: inherit;">2 phút trước</font></font>
@@ -113,76 +114,13 @@
                             <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
                         </svg>
                     </div>
-                    <p class="detail-tab-comment__content"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Vịt quay Bắc Kinh là một món ăn từ Bắc Kinh được chế biến từ thời phong kiến. Đặc điểm của loại thịt này là lớp da mỏng và giòn, còn các phiên bản chính thống của món ăn thì phục vụ chủ yếu là da với ít thịt, được người nấu thái lát trước mặt thực khách.</font></font></p>
-                    </div>
-                </div>
-
-                <div class="detail-tab-comment__customer">
-                    <div class="MuiAvatar-root MuiAvatar-circle detail-tab-comment__customer-avatar">
-                        <img alt="hình đại diện" src="assets/img/sandwich_the-bomb-sandwich.avif" class="MuiAvatar-img"></div><div class="detail-tab-comment__wrapper">
-                            <div class="detail-tab-comment__row"><h4 class="detail-tab-comment__name">
-                                <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nguyễn Văn ABC</font></font></h4>
-                                <time class="detail-tab-comment__date" datetime="2022-05-26T13:20:45.844Z" title="2022-05-26 13:20">
-                                    <font style="vertical-align: inherit;">
-                                        <font style="vertical-align: inherit;">2 phút trước</font></font>
-                                    
-                                </time>
-                            </div>
-                     <div class="detail-tab-comment__stars">
-                         <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true" style="fill: rgb(253, 218, 129);">
-                             <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                        </svg>
-                        <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true" style="fill: rgb(253, 218, 129);">
-                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                        </svg>
-                        <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true" style="fill: rgb(253, 218, 129);">
-                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                        </svg>
-                        <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true" style="fill: rgb(253, 218, 129);">
-                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path></svg>
-                            
-                        <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true" style="fill: rgb(253, 218, 129);">
-                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                        </svg>
-                    </div>
-                    <p class="detail-tab-comment__content"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Đây là bình luận của tôi abc</font></font></p>
-                    </div>
-                </div>
-
-                <div class="detail-tab-comment__customer">
-                    <div class="MuiAvatar-root MuiAvatar-circle detail-tab-comment__customer-avatar">
-                        <img alt="hình đại diện" src="assets/img/drinks_boba-tea-kit.avif" class="MuiAvatar-img"></div><div class="detail-tab-comment__wrapper">
-                            <div class="detail-tab-comment__row"><h4 class="detail-tab-comment__name">
-                                <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nguyễn Văn ABC</font></font></h4>
-                                <time class="detail-tab-comment__date" datetime="2022-05-26T13:20:45.844Z" title="2022-05-26 13:20">
-                                    <font style="vertical-align: inherit;">
-                                        <font style="vertical-align: inherit;">2 phút trước</font></font>
-                                    
-                                </time>
-                            </div>
-                     <div class="detail-tab-comment__stars">
-                         <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true" style="fill: rgb(253, 218, 129);">
-                             <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                        </svg>
-                        <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true" style="fill: rgb(253, 218, 129);">
-                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                        </svg>
-                        <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true" style="fill: rgb(253, 218, 129);">
-                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                        </svg>
-                        <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true" style="fill: rgb(253, 218, 129);">
-                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path></svg>
-                            
-                        <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true" style="fill: rgb(253, 218, 129);">
-                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                        </svg>
-                    </div>
-                    <p class="detail-tab-comment__content"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Đây là bình luận của tôi abc</font></font></p>
+                    <p class="detail-tab-comment__content"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> <c:out value="${comment.comment }"></c:out> </font></font></p>
                     </div>
                 </div>
             </div>
+            </c:forEach>
             <div class="detail-tab-add-comment"> 
-                <form class="detail-tab-user__form" method="post">
+                <form class="detail-tab-user__form" action="add-comment?id=<c:out value="${product.productID }" />" method="post">
                     <textarea name="comment" class="detail-tab-user__textarea" placeholder="Viết bình luận của bạn ở đây..."></textarea>
                     <button type="submit">
                         <button class="MuiButtonBase-root MuiButton-root MuiButton-text primary-btn red detail-tab-user__submit" type="submit">

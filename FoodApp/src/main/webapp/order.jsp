@@ -23,38 +23,38 @@
 				<div class="Popular">
 					<div class="nane_order">Popular</div>
 					<div class="Popular_BanhBao Popular_content">
-						<img src="/assets/img/sidebar_burger.svg" alt=""> <a href="burger">Burger
+						<img src="/assets/img/sidebar_burger.svg" alt=""> <a style = "text-decoration: none" href="category-burger">Burger
 						</a>
 					</div>
 					<div class="Popular_Banhmy Popular_content">
-						<img src="/assets/img/sidebar_bread.svg" alt=""> <a href="bakery">Bánh mỳ
+						<img src="/assets/img/sidebar_bread.svg" alt=""> <a  style = "text-decoration: none" href="category-bakery">Bánh mỳ
 						</a>
 					</div>
 					<div class="Popular_NuocHoaQuan Popular_content">
-						<img src="/assets/img/sidebar_drinks.svg" alt=""> <a href="drink">Đồ uống
+						<img src="/assets/img/sidebar-drinks.svg" alt=""> <a  style = "text-decoration: none" href="category-drink">Đồ uống
 						</a>
 					</div>
 					<div class="Popular_Xoi Popular_content">
-						<img src="/assets/img/sidebar_pizza.svg" alt=""> <a href="pizza">Pizza
+						<img src="/assets/img/sidebar_pizza.svg" alt=""> <a  style = "text-decoration: none" href="category-pizza">Pizza
 						</a>
 					</div>
 					<div class="Popular_Pho Popular_content">
-						<img src="/assets/img/sidebar_chicken.svg" alt=""> <a href="kfc">Gà rán
+						<img src="/assets/img/sidebar_chicken.svg" alt=""> <a style = "text-decoration: none" href="category-kfc">Gà rán
 						</a>
 					</div>
 				</div>
 				<div class="Price">
 					<div class="nane_order">Price</div>
 					<div class="Popular_BanhBao Popular_content">
-						<img src="/assets/img/money-bag-svgrepo-com.svg" alt=""> <a href="lower50">
+						<img src="/assets/img/money-bag-svgrepo-com.svg" alt=""> <a style = "text-decoration: none" href="category-lower50">
 							&lt 50.000đ </a>
 					</div>
 					<div class="Popular_Banhmy Popular_content">
-						<img src="/assets/img/money-bag-svgrepo-com.svg" alt=""> <a href="between50and100">
+						<img src="/assets/img/money-bag-svgrepo-com.svg" alt=""> <a style = "text-decoration: none" href="category-between50and100">
 							50.000đ - 100.000đ </a>
 					</div>
 					<div class="Popular_NuocHoaQuan Popular_content">
-						<img src="/assets/img/money-bag-svgrepo-com.svg" alt=""> <a href="higher100">
+						<img src="/assets/img/money-bag-svgrepo-com.svg" alt=""> <a style = "text-decoration: none" href="category-higher100">
 							&gt 100.000đ </a>
 					</div>
 				</div>
@@ -97,9 +97,9 @@
 				<div class="Shop">
 					<!-- Day la tung content -->
 					<c:forEach var="product" items="${products }">
-						<a class="shop-product">
+						<a style="text-decoration: none" class="shop-product" href="product?id=<c:out value="${product.productID }" />">
 							<div class="shop-product-description">
-								<span class="shop-product-description-fav">Favourite</span> <img
+								<img
 									class="shop-product-description-rate-img"
 									src="${pageContext.request.contextPath }/assets/img/${product.imageLink}" alt="">
 							</div>
@@ -114,7 +114,7 @@
 												d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"></path></svg>
 										<span>Hanoi, VN</span>
 									</div>
-									<div class="shop-product__price"><c:out value="${product.price }"></c:out></div>
+									<div class="shop-product__price"><c:out value="${product.price }"></c:out> VNĐ</div>
 								</div>
 							</div>
 						</a>
@@ -130,9 +130,6 @@
 	</div>
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/js/app.js"></script>
-	<script>
-		document.location.action = 'localhost:8080/product'
-	</script>
+		src="${pageContexth.request.contextPath }/js/app.js"></script>
 </body>
 </html>

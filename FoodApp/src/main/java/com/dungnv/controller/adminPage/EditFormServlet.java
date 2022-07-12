@@ -1,7 +1,6 @@
-package com.dungnv.controller;
+package com.dungnv.controller.adminPage;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,30 +8,32 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dungnv.dao.CommentDAO;
 import com.dungnv.dao.ProductDAO;
-import com.dungnv.model.Comment;
 import com.dungnv.model.Product;
 
-@WebServlet(urlPatterns = {"/product"})
-public class ProductServlet extends HttpServlet {
-	private CommentDAO commentDAO;
+@WebServlet(urlPatterns = {"/edit"})
+public class EditFormServlet extends HttpServlet {
 	private ProductDAO productDAO;
 	
 	@Override
 	public void init() throws ServletException {
 		productDAO = new ProductDAO();
-		commentDAO = new CommentDAO();
-	}
+	} 
 	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		doGet(req, resp);
+	}
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String id = req.getParameter("id");
-		Product product = productDAO.getProduct(id);
-		req.setAttribute("product", product);
-		ArrayList<Comment> comments = commentDAO.getComments(id);
-		req.setAttribute("comments", comments);
-		req.getRequestDispatcher("product.jsp").forward(req, resp);
-		return;
+		Product productEdit = productDAO.getProduct(id);
+		req.setAttribute("productEdit", productEdit);
+		try {
+			req.getRequestDispatcher("adminPage-edit.jsp").forward(req, resp);
+			return;
+		} catch (ServletException | IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

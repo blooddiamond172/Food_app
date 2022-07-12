@@ -21,6 +21,14 @@ public class User implements Serializable {
 		this.phoneNumber = phoneNumber;
 		this.password = password;
 	}
+	
+
+	public User(Integer userID, String password, String phoneNumber) {
+		super();
+		this.userID = userID;
+		this.password = password;
+		this.phoneNumber = phoneNumber;
+	}
 
 
 	public User(Integer userID, String username, 
