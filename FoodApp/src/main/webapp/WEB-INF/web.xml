@@ -10,5 +10,6 @@
     <welcome-file>adminPage.jsp</welcome-file>
     <welcome-file>adminPage-edit.jsp</welcome-file>
     <welcome-file>adminPage-add.jsp</welcome-file>
+    <welcome-file>cart.jsp</welcome-file>
   </welcome-file-list>
 </web-app>

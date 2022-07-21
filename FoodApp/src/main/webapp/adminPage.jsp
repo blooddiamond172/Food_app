@@ -161,7 +161,7 @@
                                     <a href="edit?id=<c:out value="${product.productID }"></c:out>">Sửa</a>
                                 	</div>
                             	</th>
-                           		 <th><button class="btn-delete-product">Xóa</button></th>
+                           		 <th><a class="btn-delete-product" href="delete?id=<c:out value="${product.productID }"/>">Xóa</a></th>
                         	</tr>
         				
         				</c:forEach>

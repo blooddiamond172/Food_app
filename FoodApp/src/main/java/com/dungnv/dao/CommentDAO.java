@@ -17,6 +17,10 @@ public class CommentDAO {
 	private String SELECT_ALL_COMMENT = 
 			"SELECT * FROM food_app.comment WHERE product_id=?"
 			+ " LIMIT 4;";
+	private String SELECT_USERNAME = 
+			"SELECT username"
+			+ " FROM user as u join comment as cmt on u.user_id = cmt.user_id"
+			+ " WHERE product_id like ?;";
 	
 	private String INSERT_COMMENT = 
 			"INSERT INTO food_app.comment VALUES(?,?,?);";
@@ -51,17 +55,23 @@ public class CommentDAO {
 	public ArrayList<Comment> getComments(String id) {
 		Connection con = getConnection();
 		ArrayList<Comment> comments = new ArrayList<>();
-		PreparedStatement preparedStatement;
+		PreparedStatement preparedStatement1;
+		PreparedStatement preparedStatement2;
 		try {
-			preparedStatement = con.prepareStatement(SELECT_ALL_COMMENT);
-			preparedStatement.setString(1, id);
-			System.out.println(preparedStatement);
-			ResultSet resultSet = preparedStatement.executeQuery();
-			while (resultSet.next()) {
-				Integer userID = resultSet.getInt("user_id");
-				String productID = resultSet.getString("product_id");
-				String comment = resultSet.getString("short_comment");
-				Comment cmt = new Comment(userID,productID,comment);
+			preparedStatement1 = con.prepareStatement(SELECT_ALL_COMMENT);
+			preparedStatement2 = con.prepareStatement(SELECT_USERNAME);
+			preparedStatement1.setString(1, id);
+			preparedStatement2.setString(1, id);
+			System.out.println(preparedStatement1);
+			System.out.println(preparedStatement2);
+			ResultSet resultSet1 = preparedStatement1.executeQuery();
+			ResultSet resultSet2 = preparedStatement2.executeQuery();
+			while (resultSet1.next() && resultSet2.next()) {
+				Integer userID = resultSet1.getInt("user_id");
+				String username = resultSet2.getString("username");
+				String productID = resultSet1.getString("product_id");
+				String comment = resultSet1.getString("short_comment");
+				Comment cmt = new Comment(userID,username,productID,comment);
 				comments.add(cmt);
 			}
 		} catch (SQLException e) {

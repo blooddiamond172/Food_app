@@ -47,14 +47,14 @@
                             <label class="label-field"  for="password">Mật khẩu</label> <br>
                             <div class="Resgister-input">   
                                 <span><i class="fas fa-key"></i></span>
-                                <input id="passwordregister" class="input-field" type="text" name="password" placeholder="Mật khẩu"  onblur="ValidatePass()">
+                                <input id="passwordregister" class="input-field" type="password" name="password" placeholder="Mật khẩu"  onblur="ValidatePass()">
                             </div>
 
                             <label class="label-field"  for="enterthepass">Nhập lại mật khẩu</label> <br>
                             <div class="Resgister-input">
                                
                                 <span><i class="fas fa-key"></i></span>
-                                <input id="password2register" class="input-field" type="text" name="password2" placeholder="Nhập lại mật khẩu" onblur="ValidatePass2()">
+                                <input id="password2register" class="input-field" type="password" name="password2" placeholder="Nhập lại mật khẩu" onblur="ValidatePass2()">
                             </div>
 
                             <label class="label-field"  for="enterthepass">Địa chỉ</label> <br>

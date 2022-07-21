@@ -42,7 +42,9 @@ public class UserDAO {
 				Integer userID = resultSet.getInt("user_id");
 				String phoneNumber = resultSet.getString("phone_number");
 				String password = resultSet.getString("password");
-				User user = new User(userID, password, phoneNumber);
+				String username = resultSet.getString("username");
+				String address = resultSet.getString("address");
+				User user = new User(userID,username, password, phoneNumber, address);
 				users.add(user);
 			}
 		} catch (SQLException e) {

@@ -71,7 +71,7 @@
                 <div class="detail-content_addtocart">
                     <!-- <input type="number" max="5" step="1" value="1" ></button> -->
                     <button class="detail-content_addtocart_button" type="button"> 
-                        <span class="detail-content_addtocart_span">Add to cart</span>
+                        <a class="detail-content_addtocart_span" style = "text-decoration: none" href="create-cart?idP=<c:out value="${product.productID }" />">Add to cart</a>
                     </button>
                 </div>
             </div>
@@ -90,7 +90,7 @@
                     <div class="MuiAvatar-root MuiAvatar-circle detail-tab-comment__customer-avatar">
                         <img alt="hình đại diện" src="assets/img/drinks_boba-tea-kit.avif" class="MuiAvatar-img"></div><div class="detail-tab-comment__wrapper">
                             <div class="detail-tab-comment__row"><h4 class="detail-tab-comment__name">
-                                <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> <c:out value="${comment.userID }"></c:out> </font></font></h4>
+                                <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> <c:out value="${comment.username }"></c:out> </font></font></h4>
                                 <time class="detail-tab-comment__date" datetime="2022-05-26T13:20:45.844Z" title="2022-05-26 13:20">
                                     <font style="vertical-align: inherit;">
                                         <font style="vertical-align: inherit;">2 phút trước</font></font>

@@ -16,6 +16,11 @@ public class ProductDAO {
 	
 	private String SELECT_ALL_PRODUCT = 
 			"SELECT * FROM food_app.product;";
+	private String SELECT_PRODUCTS = 
+			"SELECT * FROM food_app.product\r\n"
+			+ "WHERE product_id NOT IN \r\n"
+			+ "(SELECT product_id FROM food_app.product\r\n"
+			+ "WHERE product_id like 'D%');";
 	private String SELECT_PRODUCT = 
 			"SELECT * FROM food_app.product WHERE product_id = ?;";
 	private String SELECT_ALL_BURGER = 
@@ -38,10 +43,13 @@ public class ProductDAO {
 			"SELECT * FROM food_app.product WHERE price > 100000;";
 	
 	private String UPDATE_PRODUCT = 
-			"UPDATE food_app.product SET name=N'?', price=?, image_link=?, short_description=N'?'"
+			"UPDATE food_app.product"
+			+ " SET name= ?, price= ?, image_link= ?, short_description= ? \r\n"
 			+ "WHERE product_id=?;";
 	private String INSERT_PRODUCT = 
 			"INSERT INTO food_app.product VALUES(?,?,?,?,?);";
+	private String DELETE_PRODUCT = 
+			"DELETE FROM food_app.product WHERE product_id=?;";
 	
 	public static Connection getConnection() {
 		try {
@@ -53,11 +61,33 @@ public class ProductDAO {
 		return null;
 	}
 
-	public ArrayList<Product> getProducts() {
+	public ArrayList<Product> getProductsOfAdminPage() {
 		ArrayList<Product> products = new ArrayList<>();
 		Connection con = getConnection();
 		try {
 			PreparedStatement preparedStatement = con.prepareStatement(SELECT_ALL_PRODUCT);
+			System.out.println(preparedStatement);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				String id = resultSet.getString("product_id");
+				String name = resultSet.getString("name");
+				Integer price = resultSet.getInt("price");
+				String imageLink = resultSet.getString("image_link");
+				String shortDescription = resultSet.getString("short_description");
+				Product product = new Product(id,name,price,imageLink,shortDescription);
+				products.add(product);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return products;
+	}
+	
+	public ArrayList<Product> getProducts() {
+		ArrayList<Product> products = new ArrayList<>();
+		Connection con = getConnection();
+		try {
+			PreparedStatement preparedStatement = con.prepareStatement(SELECT_PRODUCTS);
 			System.out.println(preparedStatement);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
@@ -271,19 +301,13 @@ public class ProductDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return (new Product());
+		return null;
 	}
 
 	public int updateProduct(Product newProduct) {
 		Connection con = getConnection();
-		PreparedStatement preparedStatement;
 		try {
-			preparedStatement = con.prepareStatement(UPDATE_PRODUCT);
-			System.out.println(newProduct.getProductID());
-			System.out.println(newProduct.getName());
-			System.out.println(newProduct.getPrice());
-			System.out.println(newProduct.getImageLink());
-			System.out.println(newProduct.getShortDescription());
+			PreparedStatement preparedStatement = con.prepareStatement(UPDATE_PRODUCT);
 			preparedStatement.setString(1, newProduct.getName());
 			preparedStatement.setInt(2, newProduct.getPrice());
 			preparedStatement.setString(3, newProduct.getImageLink());
@@ -331,5 +355,19 @@ public class ProductDAO {
 			e.printStackTrace();
 		}
 		return 0;
+	}
+
+	public void deleteProduct(String id) {
+		Connection con = getConnection();
+		PreparedStatement preparedStatement;
+		try {
+			preparedStatement = con.prepareStatement(DELETE_PRODUCT);
+			preparedStatement.setString(1, id);
+			System.out.println(preparedStatement);
+			preparedStatement.executeUpdate();
+			return;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }

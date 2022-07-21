@@ -17,6 +17,14 @@ public class User implements Serializable {
 	}
 
 
+	public User(Integer userID, String username, String phoneNumber, String address) {
+		this.userID = userID;
+		this.username = username;
+		this.phoneNumber = phoneNumber;
+		this.address = address;
+	}
+
+
 	public User(String phoneNumber ,String password) {
 		this.phoneNumber = phoneNumber;
 		this.password = password;
@@ -24,7 +32,6 @@ public class User implements Serializable {
 	
 
 	public User(Integer userID, String password, String phoneNumber) {
-		super();
 		this.userID = userID;
 		this.password = password;
 		this.phoneNumber = phoneNumber;

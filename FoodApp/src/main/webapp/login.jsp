@@ -41,7 +41,7 @@
                             <label class="label-field"  for="password">Mật khẩu</label> <br>
                             <div class="Login-input">   
                                 <span><i class="fas fa-key"></i></span>
-                                <input id="password-login" class="input-field" type="text" name="password" placeholder="Mật khẩu"  onblur="ValidatePassLogin()">
+                                <input id="password-login" class="input-field" type="password" name="password" placeholder="Mật khẩu"  onblur="ValidatePassLogin()">
                             </div>
                             
                             <button class="btn-login" type="submit"><span>Đăng nhập</span></button>

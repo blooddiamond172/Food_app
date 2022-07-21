@@ -13,26 +13,29 @@ $(function () {
       </div>   
       <div class="Nav_right">
           <ul class="Nav_right_ul">
-              <li><a href="Cart.html"><i class="fas fa-shopping-cart"></i></a></li>
-              <li><a href="login.jsp"><i class="fas fa-user"></i>${window.localStorage.getItem('user')}</a></li>
+              <li><a href="your-cart"><i class="fas fa-shopping-cart"></i></a></li>
+              <li><a href="login.jsp"><i class="fas fa-user"></i>Đăng nhập</a></li>
           </ul>
       </div>
     </div> 
   `
     document.querySelector(".Footer").innerHTML = `
-  <div class="footer_pc">
+    <div class="footer_pc">
     <div class="footer_contact">
-        <div><i class="fas fa-map-marker-alt"></i>Địa chỉ: xxxxxxxxxxxxxxxx</div>
-        <div><i class="fas fa-phone"></i>Số điện thoại liên hệ: xxxxxxxxxx</div>
-        <div><i class="fas fa-envelope"></i>Gmail: xxxxxxxxxxxxx@gmail.com</div>
-        <div><i class="fab fa-facebook"></i>Facebook</div>
+        <h2>Liên hệ</h2>
+        <br>
+        <div><i class="fas fa-map-marker-alt"></i>Địa chỉ: Chiến Thắng, Tân Triều, Thanh Trì, Hà Nội</div>
+        <div><i class="fas fa-phone"></i>Số điện thoại liên hệ: 024 3854 4244</div>
+        <div><i class="fas fa-envelope"></i>Gmail: 79food@gmail.com</div>
     </div>
-    <div class="footer_about">Danh mục cửa hàng
-        <ol>
-            <li>Món ăn mới</li>
-            <li>Món ăn được yêu thích nhất</li>
-            <li>Đánh giá của chuyên gia</li>
-        </ol>
+    <div class="footer_about">
+        <h2>Mạng xã hội</h2>
+        <br>
+        <div style="display: grid">
+            <a class="fb"><i class="fab fa-facebook"></i>Facebook</a>
+            <a class="ig"><i class="fa-brands fa-instagram"></i>Instagram</a>
+            <a class="yt"><i class="fa-brands fa-youtube"></i>Youtube</a>
+        </div>
     </div>
   </div>
 `

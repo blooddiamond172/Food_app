@@ -37,22 +37,23 @@ public class LoginServlet extends HttpServlet {
 		Matcher matcher1 = pattern1.matcher(phoneNumber);
 		Matcher matcher2 = pattern2.matcher(password);
 		if (matcher1.matches() && matcher2.matches()) {
-			if (phoneNumber.equals("1900171717") && password.equals("Admin123")) {
+			if (phoneNumber.equals("1900171717") && password.equals("Admin12345")) {
 				resp.sendRedirect("admin-page");
+				return;
 			} else {
-			for (User user : users) {
-				if (phoneNumber.equals(user.getPhoneNumber()) && 
-						password.equals(user.getPassword())) {
-					HttpSession httpSession = req.getSession();
-					httpSession.setAttribute("user", user);
-					resp.sendRedirect("index.jsp");
-					return;
+				users = userDAO.getUserList(phoneNumber);
+				for (User user : users) {
+					if (phoneNumber.equals(user.getPhoneNumber()) && 
+							password.equals(user.getPassword())) {
+						HttpSession httpSession = req.getSession();
+						httpSession.setAttribute("user", user);
+						resp.sendRedirect("index.jsp");
+						return;
+					}
 				}
-			}
-			resp.sendRedirect("login.jsp");
-			}
-		} else {
-			resp.sendRedirect("login.jsp");
+				}
 		}
+		resp.sendRedirect("login.jsp");
+		return;
 	}
 }

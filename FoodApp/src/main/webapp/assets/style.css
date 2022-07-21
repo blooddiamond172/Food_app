@@ -101,6 +101,42 @@ body{
 .logo{
     height: 58px;}
 
+/* Footer */
+.footer_pc{
+    display: flex;
+    justify-content: space-evenly;
+    font-family: Arial, Helvetica, sans-serif;
+    background:#202020;
+    color: white;
+    padding-top: 25px;
+    background-image: url(/assets/img/banner-footer.jpg);
+}
+.footer_contact div,
+.footer_about a{
+    margin-bottom: 16px;
+}
+.footer_contact div i,
+.footer_about div i{
+    margin-right: 12px;
+}
+.footer_pc h2{
+    font-size: 24px;
+    color: #ff514e;
+    border-left: solid 4px #ff514e;
+    padding-left: 6px;
+}
+.footer_about div .fb:hover{
+    color: #087aea;
+    cursor: pointer;
+}
+.footer_about div .ig:hover{
+    color: #f04c5b;
+    cursor: pointer;
+}
+.footer_about div .yt:hover{
+    color: #ff0000;
+    cursor: pointer;
+}
 
 /* Banner */
 .banner_about{
@@ -261,27 +297,6 @@ background-image: url(/assets/img/banner-st.57953e4d.jpg);
     margin-top: 20px;
 }
 
-/* Thanh Footer */
-.footer_pc{
-    display: flex;
-    justify-content: space-around;
-    background:#202020;
-    color: white;
-    padding-top: 25px;
-}
-.footer_contact div{
-    margin-bottom: 16px;
-}
-.footer_contact div i{
-    margin-right: 16px;
-}
-.footer_about{
-    font-size: 17px;
-}
-.footer_about ol li{
-    margin-bottom: 16px;
-}
-
 .Banner_nav_order{
     height: 70px;
     background-image: url(img/banner-nav.jpg);
@@ -292,7 +307,7 @@ background-image: url(/assets/img/banner-st.57953e4d.jpg);
 .Order{
     width: 1100px;
     margin: auto;
-    height: 850px;
+    height: auto;
     display: flex;
     justify-content: flex-start;
     margin-top: 16px;
@@ -428,13 +443,14 @@ background-image: url(/assets/img/banner-st.57953e4d.jpg);
     justify-content: space-around;
     flex-wrap: wrap;
     /* background-color: aqua; */
-    height: 700px;
+    height: auto;
     margin-top: 10px;
 }
 .shop-product{
     width: 270px;
-    height: 260px;
+    height: auto;
     position: relative;
+    margin-bottom: 36px;
 }
 
 .shop-product-description-fav{
@@ -477,6 +493,7 @@ background-image: url(/assets/img/banner-st.57953e4d.jpg);
 .shop-product-description-rate-img{
     height: 240px;
     width: 270px;
+    border-radius: 6px;
 }
 .shop-product-description-rate img{
     width: 23px;
@@ -1319,6 +1336,7 @@ figure.zoom {
 }
 .cartSection-img-header{
     margin-left: 16px;
+    
 }
 
 .cartSection-img-header{
@@ -1326,7 +1344,7 @@ figure.zoom {
 
 }
 .cartSection-img-header p{
-    padding-top: 15px;
+    padding-top: 10px;
    
 }
 
@@ -1369,18 +1387,19 @@ figure.zoom {
 
 .cart .items .cartSection p {
     display: inline-block;
-    font-size: .85em;
+    font-size: 16px;
     color: #777777;
     font-family: "Montserrat", sans-serif;
 }
 
 .cart .items .cartSection input.qty {
-    width: 2em;
-    text-align: center;
-    font-size: 1em;
-    padding: 0.25em;
-    margin: 1em 0.5em 0 0;
+    width: 22px;
+    font-size: 15px;
+    /* padding: 0.25em; */
+    padding: 2px;
+    /* margin: 1em 0.5em 0 0; */
     border: solid 1px #777777;;
+    margin: 0px;
 }
 
 /* .cart .items .cartSection p.stockStatus {
@@ -1405,9 +1424,10 @@ figure.zoom {
 }
 
 .items .cartSection.prodTotal p {
-    font-weight: bold;
-    font-size: 24px;
-    color:#ff514e ;
+    /* font-weight: bold; */
+    font-weight: 550;
+    font-size: 18px;
+    color:#ee4d2d;
 }
 .cart .items .cartSection {
     display: table-cell;
@@ -1416,7 +1436,7 @@ figure.zoom {
 
 .prodTotals{
     display: inline-block;
-
+    /* font-size: 15px; */
     color: #ff514e;
     font-family: "Montserrat", sans-serif;
 }
@@ -1424,11 +1444,12 @@ figure.zoom {
 div.remove {
     text-decoration: none;
     font-size: 18px;
-    color: #ff0000;
-    font-weight: 600;
-    background: #e0e0e0;
-    padding: 0.5em;
+    color: #ee4d2d;
+    background: #e6e5e5;
+    /* padding: 0.5em; */
+    padding: 5px;
     display: inline-block;
+
 }
 div.remove:hover{
     cursor: pointer;
@@ -1438,7 +1459,7 @@ div.remove:hover{
 
 .totalsub-head{
     text-transform: uppercase;
-    font-size: 19px;
+    font-size: 15px;
     font-weight: 600;
     /* color: #ff514e; */
     text-align: center;
@@ -1448,15 +1469,15 @@ div.remove:hover{
     padding: 8px;
 }
 .subtotal{
-    margin-top: 15px;
-    padding-top: 10px;
+    margin-top: 25px;
+    /* padding-top: 10px; */
     padding-bottom: 10px;
     border-top:  solid 1px black ;
     border-bottom: solid 1px black;
-    
+    font-size: 16px;
 }
 .protosubtotal{
-    font-size: 19px;
+    font-size: 17px;
     display: flex;
     justify-content: space-between;
     /* width: 200px; */
@@ -1471,28 +1492,35 @@ div.remove:hover{
 }
 
 .TotalPrice {
-    font-size: 19px;
+    font-size: 16px;
     background: #32c15f;
     color: #fff;
     padding: 8px;
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     font-weight: 600;
-    
+    /* display: flex; */
+    justify-content: center;
 }
+
 .TotalPrice-head{
     text-transform: uppercase;
     /* margin-top: 0.5em; */
     font-weight: bold;
-    font-size: 18px;
+    font-size: 17px;
 }
-
+.payment-magiamgia{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
 .TotalPrice-total{
     font-size: 1.1em;
 }
 .payment {
-    margin-top: 20px;
+    margin-top: 15px;
     margin-bottom: 20px;
+    font-size: 15px;
 }
 .payment h3{
     font-size: 18px;
@@ -1506,14 +1534,28 @@ div.remove:hover{
     font-size: 18px;
 }
 .payment > a, .terms > a, .ux-card a {
-    color: #008A32;
+    color: #2f9f58;
     font-weight: bold;
     text-decoration: none;
 }
 
 .headline-primary {
-    text-transform: uppercase;
-    font-size: 21px;
+    line-height: 32px;
+    font-size: 16px;
+   
+}
+.headline-primary-input{
+    border: solid 1px;
+    width: 165px;
+    height: 30px;
+    border-radius: 3px;
+}
+.headline-primary-submit{
+    height: 32px;
+    width: 35px;
+    border-radius: 3px;
+    background-color: #ee4d2d;
+    color: white;
 }
 .ux-card{
     border: 1px solid #E8E8E8;
@@ -1534,23 +1576,23 @@ div.remove:hover{
 }
 
 .fa-hand-holding-usd{
-    color: rgba(2, 160, 31, 0.881);
-    font-size: 25px;
+    color: rgba(31, 156, 54, 0.881);
+    font-size: 26px;
     line-height: 50px;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 26px;
+    margin-right: 14px;
 }
 
 .Button-TotalPrice{
-    background: #32c15f;
+    background: #30ae58;
     color: #fff;
-    padding: 10px 5px ;
-    font-weight: 600;
-    width: 180px;
+    padding: 7px 3px ;
+    font-weight: 500;
+    width: 170px;
     font-size: 20px;
     margin-left: 90px;
     margin-top: 20px;
-    border-radius: 5px;
+    border-radius: 3px;
 }
 
 .Button-TotalPrice:hover{
