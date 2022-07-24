@@ -13,7 +13,7 @@ import com.dungnv.dao.ProductDAO;
 import com.dungnv.model.Product;
 
 @WebServlet(urlPatterns = { "/category-lower" })
-public class PriceLower50Servlet extends HttpServlet {
+public class PriceLowerServlet extends HttpServlet {
 	private ProductDAO productDAO;
 
 	@Override
