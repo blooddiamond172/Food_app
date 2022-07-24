@@ -21,8 +21,10 @@ public class ProductDAO {
 			+ "WHERE product_id NOT IN \r\n"
 			+ "(SELECT product_id FROM food_app.product\r\n"
 			+ "WHERE product_id like 'D%');";
-	private String SELECT_PRODUCT = 
+	private String SELECT_PRODUCT_BY_ID = 
 			"SELECT * FROM food_app.product WHERE product_id = ?;";
+	private String SELECT_PRODUCT_BY_NAME = 
+			"SELECT * FROM food_app.product WHERE name like N?;";
 	private String SELECT_ALL_BURGER = 
 			"SELECT * FROM food_app.product WHERE name like 'BURGER%';";
 	private String SELECT_ALL_BAKERY = 
@@ -34,13 +36,14 @@ public class ProductDAO {
 			"SELECT * FROM food_app.product WHERE name like 'PIZZA%';";
 	private String SELECT_ALL_KFC = 
 			"SELECT * FROM food_app.product WHERE name like 'GÀ%';";
-	private String SELECT_PRODUCTS_LOWER_50 = 
-			"SELECT * FROM food_app.product WHERE price < 50000 and product_id not in "
-			+ "(SELECT product_id FROM food_app.product WHERE product_id like 'D%');";
-	private String SELECT_ALL_PRODUCTS_BETWEEN_50_AND_100 = 
-			"SELECT * FROM food_app.product WHERE price between 50000 and 100000;";
-	private String SELECT_ALL_PRODUCTS_HIGHER_100 = 
-			"SELECT * FROM food_app.product WHERE price > 100000;";
+	private String SELECT_PRODUCTS_LOWER = 
+			"SELECT * FROM food_app.product WHERE product_id not in "
+			+ "(SELECT product_id FROM food_app.product WHERE product_id like 'D%') "
+			+ "ORDER BY price DESC;";
+	private String SELECT_ALL_PRODUCTS_HIGHER = 
+			"SELECT * FROM food_app.product WHERE product_id not in "
+			+ "(SELECT product_id FROM food_app.product WHERE product_id like 'D%') "
+			+ "ORDER BY price;";
 	
 	private String UPDATE_PRODUCT = 
 			"UPDATE food_app.product"
@@ -104,7 +107,30 @@ public class ProductDAO {
 		}
 		return products;
 	}
-
+	
+	public ArrayList<Product> SearchProduct(String name) {
+		ArrayList<Product> products = new ArrayList<>();
+		Connection con = getConnection();
+		try {
+			PreparedStatement preparedStatement = con.prepareStatement(SELECT_PRODUCT_BY_NAME);
+			preparedStatement.setString(1, name);
+			System.out.println(preparedStatement);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				String id = resultSet.getString("product_id");
+				String nameP = resultSet.getString("name");
+				Integer price = resultSet.getInt("price");
+				String imageLink = resultSet.getString("image_link");
+				String shortDescription = resultSet.getString("short_description");
+				Product product = new Product(id,nameP,price,imageLink,shortDescription);
+				products.add(product);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return products;
+	}
+	
 	public ArrayList<Product> getBurgers() {
 		ArrayList<Product> burgers = new ArrayList<>();
 		Connection con = getConnection();
@@ -215,33 +241,11 @@ public class ProductDAO {
 		return kfcs;
 	}
 
-	public ArrayList<Product> getListOfProductLower50() {
+	public ArrayList<Product> getListOfProductLower() {
 		ArrayList<Product> products = new ArrayList<>();
 		Connection con = getConnection();
 		try {
-			PreparedStatement preparedStatement = con.prepareStatement(SELECT_PRODUCTS_LOWER_50);
-			System.out.println(preparedStatement);
-			ResultSet resultSet = preparedStatement.executeQuery();
-			while (resultSet.next()) {
-				String id = resultSet.getString("product_id");
-				String name = resultSet.getString("name");
-				Integer price = resultSet.getInt("price");
-				String imageLink = resultSet.getString("image_link");
-				String shortDescription = resultSet.getString("short_description");
-				Product product = new Product(id,name,price,imageLink,shortDescription);
-				products.add(product);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return products;
-	}
-
-	public ArrayList<Product> getListOfProductBetween50and100() {
-		ArrayList<Product> products = new ArrayList<>();
-		Connection con = getConnection();
-		try {
-			PreparedStatement preparedStatement = con.prepareStatement(SELECT_ALL_PRODUCTS_BETWEEN_50_AND_100);
+			PreparedStatement preparedStatement = con.prepareStatement(SELECT_PRODUCTS_LOWER);
 			System.out.println(preparedStatement);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
@@ -263,7 +267,7 @@ public class ProductDAO {
 		ArrayList<Product> products = new ArrayList<>();
 		Connection con = getConnection();
 		try {
-			PreparedStatement preparedStatement = con.prepareStatement(SELECT_ALL_PRODUCTS_HIGHER_100);
+			PreparedStatement preparedStatement = con.prepareStatement(SELECT_ALL_PRODUCTS_HIGHER);
 			System.out.println(preparedStatement);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
@@ -285,7 +289,7 @@ public class ProductDAO {
 		Connection con = getConnection();
 		PreparedStatement preparedStatement;
 		try {
-			preparedStatement = con.prepareStatement(SELECT_PRODUCT);
+			preparedStatement = con.prepareStatement(SELECT_PRODUCT_BY_ID);
 			preparedStatement.setString(1, id);
 			System.out.println(preparedStatement);
 			ResultSet resultSet = preparedStatement.executeQuery();
@@ -325,7 +329,7 @@ public class ProductDAO {
 		Connection con = getConnection();
 		PreparedStatement preparedStatement;
 		try {
-			preparedStatement = con.prepareStatement(SELECT_PRODUCT);
+			preparedStatement = con.prepareStatement(SELECT_PRODUCT_BY_ID);
 			preparedStatement.setString(1, productID);
 			System.out.println(preparedStatement);
 			ResultSet resultSet = preparedStatement.executeQuery();

@@ -1,4 +1,4 @@
-package com.dungnv.controller.category;
+package com.dungnv.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,25 +12,21 @@ import javax.servlet.http.HttpServletResponse;
 import com.dungnv.dao.ProductDAO;
 import com.dungnv.model.Product;
 
-@WebServlet(urlPatterns = { "/category-between50and100" })
-public class PriceBetween50and100Servlet extends HttpServlet {
+@WebServlet(urlPatterns = {"/search"})
+public class SearchProductServlet extends HttpServlet {
 	private ProductDAO productDAO;
-
+	
 	@Override
 	public void init() throws ServletException {
 		productDAO = new ProductDAO();
 	}
-
+	
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String name = req.getParameter("name-product");
 		ArrayList<Product> products = new ArrayList<>();
-		products = productDAO.getListOfProductBetween50and100();
+		products = productDAO.SearchProduct(name);
 		req.setAttribute("products", products);
-		try {
-			req.getRequestDispatcher("order.jsp").forward(req, resp);
-			return;
-		} catch (ServletException | IOException e) {
-			e.printStackTrace();
-		}
+		resp.sendRedirect("order.jsp");
 	}
 }

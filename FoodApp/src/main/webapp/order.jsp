@@ -46,16 +46,12 @@
 				<div class="Price">
 					<div class="nane_order">Price</div>
 					<div class="Popular_BanhBao Popular_content">
-						<img src="/assets/img/money-bag-svgrepo-com.svg" alt=""> <a style = "text-decoration: none" href="category-lower50">
-							&lt 50.000đ </a>
+						<img src="/assets/img/money-bag-svgrepo-com.svg" alt=""> <a style = "text-decoration: none" href="category-higher">
+							Tăng dần </a>
 					</div>
 					<div class="Popular_Banhmy Popular_content">
-						<img src="/assets/img/money-bag-svgrepo-com.svg" alt=""> <a style = "text-decoration: none" href="category-between50and100">
-							50.000đ - 100.000đ </a>
-					</div>
-					<div class="Popular_NuocHoaQuan Popular_content">
-						<img src="/assets/img/money-bag-svgrepo-com.svg" alt=""> <a style = "text-decoration: none" href="category-higher100">
-							&gt 100.000đ </a>
+						<img src="/assets/img/money-bag-svgrepo-com.svg" alt=""> <a style = "text-decoration: none" href="category-lower">
+							Giảm dần </a>
 					</div>
 				</div>
 				<div class="Rate">
@@ -77,21 +73,10 @@
 
 			<div class="Product">
 				<div class="Searchproduct">
-					<div class="Search_name">
-						<input id="search-product" type="text"
-							placeholder="Bạn muốn tìm món ăn gì ?">
-						<div class="Featured">
-							<!-- <span></span> -->
-							<ul class="Featured_ul">
-								Sắp xếp
-								<i class="fas fa-angle-down"></i>
-								<li>Sắp xếp theo giá</li>
-								<li>Sắp xếp theo đánh giá</li>
-								<li>Sắp xếp theo lượt mua</li>
-							</ul>
-
-						</div>
-					</div>
+					<form action="search" class="Search_name" method="post">
+                        <input id="search-product" type="text" placeholder="Bạn muốn tìm món ăn gì ?"  name="name-product" onkeyup="Searchproduct()">
+                        <input type="submit" class="Featured" value="Tìm kiếm"></input>
+                    </form>
 				</div>
 
 				<div class="Shop">
@@ -119,10 +104,6 @@
 							</div>
 						</a>
 					</c:forEach>
-				</div>
-				<div class="Pagination">
-					<a href="#">«</a> <a href="#" class="active">1</a> <a href="#">2</a>
-					<a href="#">3</a> <a href="#">»</a>
 				</div>
 			</div>
 		</div>

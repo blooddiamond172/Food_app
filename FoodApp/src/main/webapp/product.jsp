@@ -40,7 +40,7 @@
                     </div>  
                 </div>
 
-                <div class="detail-content__price"><strong><c:out value="${product.price }"></c:out></strong></div> 
+                <div class="detail-content__price"><strong><c:out value="${product.price }"></c:out> VNĐ</strong></div> 
                 <div class="detail-content__tag"><span class="detail-content__tag-label">Address:</span><span class="detail-content__tag-detail">Ha Noi, Viet Nam</span> <br> <span  style="display:block; margin-top:8px; width:130px" class="detail-content-description-fav">Favourite</span></div> 
 
                 <div class="detail-tab-info">
@@ -88,7 +88,9 @@
             	<div class="detail-tab-comment"> 
                 <div class="detail-tab-comment__customer">
                     <div class="MuiAvatar-root MuiAvatar-circle detail-tab-comment__customer-avatar">
-                        <img alt="hình đại diện" src="assets/img/drinks_boba-tea-kit.avif" class="MuiAvatar-img"></div><div class="detail-tab-comment__wrapper">
+                    	<span><i class="fas fa-user-alt"></i></span>
+                        </div>
+                        <div class="detail-tab-comment__wrapper">
                             <div class="detail-tab-comment__row"><h4 class="detail-tab-comment__name">
                                 <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> <c:out value="${comment.username }"></c:out> </font></font></h4>
                                 <time class="detail-tab-comment__date" datetime="2022-05-26T13:20:45.844Z" title="2022-05-26 13:20">
@@ -122,12 +124,9 @@
             <div class="detail-tab-add-comment"> 
                 <form class="detail-tab-user__form" action="add-comment?id=<c:out value="${product.productID }" />" method="post">
                     <textarea name="comment" class="detail-tab-user__textarea" placeholder="Viết bình luận của bạn ở đây..."></textarea>
-                    <button type="submit">
                         <button class="MuiButtonBase-root MuiButton-root MuiButton-text primary-btn red detail-tab-user__submit" type="submit">
                             <span class="MuiButton-label">Add comment</span>
-                
                         </button>
-                    </button>
                 </form>
             </div>
         </div>     
@@ -136,7 +135,6 @@
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath }/js/app.js"></script>
-	<script>
 </body>
 </html>
 

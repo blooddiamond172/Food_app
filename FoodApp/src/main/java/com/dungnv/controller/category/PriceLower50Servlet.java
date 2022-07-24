@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.dungnv.dao.ProductDAO;
 import com.dungnv.model.Product;
 
-@WebServlet(urlPatterns = { "/category-lower50" })
+@WebServlet(urlPatterns = { "/category-lower" })
 public class PriceLower50Servlet extends HttpServlet {
 	private ProductDAO productDAO;
 
@@ -24,7 +24,7 @@ public class PriceLower50Servlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		ArrayList<Product> products = new ArrayList<>();
-		products = productDAO.getListOfProductLower50();
+		products = productDAO.getListOfProductLower();
 		req.setAttribute("products", products);
 		try {
 			req.getRequestDispatcher("order.jsp").forward(req, resp);

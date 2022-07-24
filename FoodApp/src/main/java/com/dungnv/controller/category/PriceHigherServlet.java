@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.dungnv.dao.ProductDAO;
 import com.dungnv.model.Product;
 
-@WebServlet(urlPatterns = { "/category-higher100" })
-public class PriceHigher100Servlet extends HttpServlet {
+@WebServlet(urlPatterns = { "/category-higher" })
+public class PriceHigherServlet extends HttpServlet {
 	private ProductDAO productDAO;
 
 	@Override

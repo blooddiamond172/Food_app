@@ -400,11 +400,11 @@ background-image: url(/assets/img/banner-st.57953e4d.jpg);
 }
 .Search_name{
     display: flex;
-    justify-content: space-between;
+    
 }
 #search-product{
     height: 44px;
-    width: 680px;
+    width: 697px;
     border: solid 1px rgb(79, 79, 79);
     border-radius: 20px;
     margin-left: 10px;
@@ -412,14 +412,21 @@ background-image: url(/assets/img/banner-st.57953e4d.jpg);
 }
 
 .Featured{
-    margin-right: 5px;
+   margin-left:15px;
     border: solid 1px rgb(79, 79, 79);
-    border-radius: 6px;
+    border-radius: 2px;
     height: 44px;
     width: 130px;
-    line-height: 44px;
-    padding-left: 26px;
+    line-height: 44px;  
+    font-size: 17px;
+    cursor: pointer;
+    background-color: #f0ecec;
 }
+.Featured:hover{
+    border: solid 1px rgb(112, 98, 98);
+    background-color: #b3b3b3;
+}
+
 .fa-angle-down{
     line-height: 44px;
     font-size: 19px;
@@ -1022,8 +1029,8 @@ figure.zoom {
 
 
 .MuiAvatar-root {
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     display: flex;
     overflow: hidden;
     position: relative;
@@ -1035,10 +1042,13 @@ figure.zoom {
     user-select: none;
     border-radius: 50%;
     justify-content: center;
+    background-color: gray;
 }
-
+.fa-user-alt{
+	color: white;
+}
 .detail-tab-comment__wrapper {
-    margin-left: 15px;
+    margin-left: 5px;
 }
 
 .detail-tab-comment__content {

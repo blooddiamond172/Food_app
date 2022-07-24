@@ -118,8 +118,13 @@ body {
 }
 
 /* Thêm sản phẩm */
-.add-product {
+/* sửa thông tin sản phẩm */
+.modal {
     text-align: center;
+    margin-bottom: 20px;
+    display: block;
+    position: inherit;
+    animation: modalFadeIn ease 0.8s;
 }
 
 .form-product {
@@ -128,23 +133,30 @@ body {
     border-radius: 8px;
 }
 
-.form-product table {
-    border: none;
-    width: 100%;
-    padding-left: 20px;
+.modal .form-add-product,
+.form-edit-product {
+    position: relative;
+    display: inline-block;
+    width: 1000px;
+    height: 500px;
+    background-color: #fff;
+    margin-top: 25px;
+    padding: 20px 20px;
+    border-radius: 6px;
+    border: solid 1px black;
 }
 
-.form-product td {
-    border: none;
+.form-row {
+    display: flex;
+    margin-top: 12px;
+    justify-content: space-between;
 }
 
 .form-product h2 {
     text-align: center;
     color: #ff514e;
-}
-
-.form-product input {
-    width: 90%;
+    margin-bottom: 30px;
+    font-size: 28px;
 }
 
 .form-product .btn-form-add-product {
@@ -162,44 +174,7 @@ body {
     background-color: rgb(20, 100, 160);
 }
 
-
-/* sửa thông tin sản phẩm */
-.modal {
-    text-align: center;
-    margin-bottom: 20px;
-    display: block;
-    position: inherit;
-    animation: modalFadeIn ease 0.8s;
-}
-@keyframes modalFadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-200px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.modal .form-edit-product {
-    position: relative;
-    display: inline-block;
-    width: 1000px;
-    height: 500px;
-    background-color: #fff;
-    margin: 50px 0;
-    padding: 40px 20px;
-    border-radius: 6px;
-    border: solid 1px black;
-}
-
-.modal .form-edit-product h2{
-    font-size: 28px;
-    color: #ff514e;
-}
-
-.btn-form-edit-product {
+.btn-form-product {
     margin: 20px 0 20px 0;
     background-color: rgb(70,140,200);
     color: #fff;
@@ -210,7 +185,7 @@ body {
     font-size: 16px;
     cursor: pointer;
 }
-.btn-form-edit-product:hover {
+.btn-form-product:hover {
     background-color: rgb(20, 100, 160);
 }
 .form-close {
@@ -225,4 +200,15 @@ body {
 .form-close:hover {
     background-color: #ccc;
     color: #000;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-200px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

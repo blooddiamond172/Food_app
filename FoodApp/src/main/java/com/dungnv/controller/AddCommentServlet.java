@@ -37,11 +37,15 @@ public class AddCommentServlet extends HttpServlet {
 		String comment = req.getParameter("comment");
 		HttpSession httpSession = req.getSession();
 		User user = (User) httpSession.getAttribute("user");
+		if (user == null) {
+			req.getRequestDispatcher("login.jsp").forward(req, resp);
+			return;
+		}
 		Integer userID = user.getUserID();
 		String productID = req.getParameter("id");
 		Comment cmt = new Comment(userID,productID,comment);
 		commentDAO.insertComment(cmt);
-		resp.sendRedirect("products");
+		resp.setHeader("Refresh", "0; URL=" + req.getContextPath() + "/product?id=" + productID );
 		return;
 	}
 }

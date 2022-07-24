@@ -94,92 +94,60 @@
             </div>
         </div>
     </nav>
-    <main role="main" id="main" style="margin-left:0"> 
-		<!-- sửa thông tin sản phẩm -->
-		<div class="modal js-modal">
-			<form action="update?id=${productEdit.productID }" class="form-product form-edit-product">
-				<a class="form-close js-form-close" href="admin-page"> <i
-					class="fa-solid fa-xmark"></i>
-				</a>
-				<table style="width: 960px;">
+    <main role="main" id="main" style="margin-left: 0 ;">
+        <!-- sửa thông tin sản phẩm -->
+        <div class="modal js-modal">
+            <div class="form-product form-add-product">
+                <a class="form-close js-form-close" href="dashboard.html">
+                    <i class="fa-solid fa-xmark"></i>
+                </a>
+                <div style="width: 700px; margin: auto;">
 
-					<h2>Thay đổi thông tin sản phẩm</h2>
-					
-					<tr>
-						<td>Mã sản phẩm:</td>
-						<td><input type="text" name="idEdit" style="width: 600px"
-							value="${productEdit.productID }"></td>
-					</tr>
-					<tr>
-						<td>Tên sản phẩm:</td>
-						<td><input type="text" name="nameEdit" style="width: 600px"
-							value="${productEdit.name }"></td>
-					</tr>
-					<tr>
-						<td>Giá tiền:</td>
-						<td><input type="text" name="priceEdit" style="width: 600px"
-							value="${productEdit.price }"></td>
-					</tr>
-					<tr>
-						<td>Mô tả:</td>
-						<td><input type="text" name="shortDescriptionEdit"
-							style="width: 600px" value="${productEdit.shortDescription }">
-						</td>
-					</tr>
-					<tr>
-						<td>Hình ảnh:</td>
-						<td style="display: flex; padding: 10px 34px">
-							<div style="margin-left: 76px; text-align: left;">
-								<img id="blah" style="height: 160px; width: 200px;"
-									src="assets/img/${productEdit.imageLink }" alt=""> <br>
-								<input id="imgInp" name="imageLinkEdit" value="${productEdit.imageLink }" type="file"
-									style="margin-top: 12px;">
-							</div>
-						</td>
-					</tr>
-				</table>
-				<button class="btn-form-edit-product">
-					<i class="fa-solid fa-check"></i> Hoàn tất
-				</button>
+                    <h2>Thay đổi thông tin sản phẩm</h2>
 
-			</form>
-		</div>
-		<ul
-			class="sticky-toolbar nav flex-column pl-2 pr-2 pt-3 pb-3 mt-4 d-none d-md-block">
-			<li class="nav-item mb-2" data-toggle="tooltip" title=""
-				data-placement="right" data-original-title="Check out more demos">
-				<button class="btn btn-sm btn-light text-success" type="button">
-					<i class="fas fa-palette"></i>
-				</button>
-			</li>
-			<li class="nav-item mb-2" data-toggle="tooltip" title=""
-				data-placement="left" data-original-title="Layout Builder">
-				<button class="btn btn-sm btn-light text-primary" type="button">
-					<i class="fas fa-cog"></i>
-				</button>
-			</li>
-			<li class="nav-item mb-2" data-toggle="tooltip" title=""
-				data-placement="left" data-original-title="Documentation">
-				<button class="btn btn-sm btn-light text-warning" type="button">
-					<i class="fab fa-telegram"></i>
-				</button>
-			</li>
-			<li class="nav-item" id="kt_sticky_toolbar_chat_toggler"
-				data-toggle="tooltip" title="" data-placement="left"
-				data-original-title="Chat Example">
-				<button class="btn btn-sm btn-light text-danger" type="button">
-					<i class="fas fa-comment-dots"></i>
-				</button>
-			</li>
-		</ul>
-	</main>
+                    <div class="form-row">
+                        <div style="display: flex">
+                            <div>Mã sản phẩm:</div> 
+                            <input type="text" style="width: 210px; margin-left: 22px;" value="${productEdit.productID }">
+                        </div>
+                        <div style="display: flex">
+                            <div>Tên sản phẩm:</div> 
+                            <input type="text" style="width: 210px; margin-left: 20px;" value="${productEdit.name }">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div>Giá tiền:</div>
+                        <input type="text" style="width: 579px" value="${productEdit.price }">
+                    </div>
+                    <div class="form-row">
+                        <div>Mô tả:</div>
+                        <textarea name="" id="" type="text" cols="74" rows="2" style="resize: none;">${productEdit.shortDescription }</textarea>
+                    </div>
+                    <div class="form-row" style="justify-content: inherit;">
+                        <div >Hình ảnh:</div>
+                        <div style="display:flex;">
+                            <div style="margin-left: 52px; text-align: left;">
+                                <input id="imgInp" type="file">
+                                <img id="imgProduct" style="height: 160px; width: 200px; margin-bottom: 10px;" src="/assets/img/${productEdit.imageLink }" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn-form-product">
+                    <i class="fa-solid fa-check"></i>
+                    Hoàn tất
+                </button>
+            </div>
+        </div>
+
+    </main>
     <script>
         imgInp.onchange = evt => {
             const [file] = imgInp.files
             if (file) {
-                blah.src = URL.createObjectURL(file)
-                blah.style.width='200px';
-                blah.style.height='160px';
+                imgProduct.src = URL.createObjectURL(file)
+                imgProduct.style.width='200px';
+                imgProduct.style.height='160px';
             }
         }
     </script>
