@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.dungnv.model.User;
 import com.oracle.wls.shaded.org.apache.regexp.recompile;
@@ -16,8 +17,12 @@ public class UserDAO {
 	private static String username = "root";
 	private static String password = "nguyenvandung";
 	
-	private String SELECT_USER = "SELECT * FROM food_app.user WHERE phone_number = ?;";
-	private String INSERT_USER = "INSERT INTO food_app.user(username,password,phone_number,address)"
+	private static String SELECT_USER = 
+			"SELECT * FROM food_app.user WHERE phone_number = ?;";
+	private static String SELECT_USERS = 
+			"SELECT * FROM food_app.user;";
+	private static String INSERT_USER = 
+			"INSERT INTO food_app.user(username,password,phone_number,address)"
 			+ " VALUE(?,?,?,?);"; 
 	
 	public static Connection getConnection() {
@@ -68,4 +73,27 @@ public class UserDAO {
 		}
 		return 0;
 }
+
+	public static List<User> getUsers() {
+		Connection con = getConnection();
+		List<User> users = new ArrayList<>();
+		PreparedStatement pre;
+		try {
+			pre = con.prepareStatement(SELECT_USERS);
+			System.out.println(pre);
+			ResultSet resultSet = pre.executeQuery();
+			while (resultSet.next()) {
+				Integer userID = resultSet.getInt("user_id");
+				String userName = resultSet.getString("username");
+				String password = resultSet.getString("password");
+				String phoneNumber = resultSet.getString("phone_number");
+				String address = resultSet.getString("address");
+				User user = new User(userID, userName, password, phoneNumber, address);
+				users.add(user);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return users;
+	}
 }
