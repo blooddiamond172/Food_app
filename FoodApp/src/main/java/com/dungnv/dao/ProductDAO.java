@@ -47,7 +47,7 @@ public class ProductDAO {
 	
 	private String UPDATE_PRODUCT = 
 			"UPDATE food_app.product"
-			+ " SET name= ?, price= ?, image_link= ?, short_description= ? \r\n"
+			+ " SET name= N?, price= ?, image_link= ?, short_description= N? \r\n"
 			+ "WHERE product_id=?;";
 	private String INSERT_PRODUCT = 
 			"INSERT INTO food_app.product VALUES(?,?,?,?,?);";

@@ -97,6 +97,7 @@
     <main role="main" id="main" style="margin-left: 0 ;">
         <!-- sửa thông tin sản phẩm -->
         <div class="modal js-modal">
+        <form action="update" method=post>
             <div class="form-product form-add-product">
                 <a class="form-close js-form-close" href="dashboard.html">
                     <i class="fa-solid fa-xmark"></i>
@@ -108,27 +109,27 @@
                     <div class="form-row">
                         <div style="display: flex">
                             <div>Mã sản phẩm:</div> 
-                            <input type="text" style="width: 210px; margin-left: 22px;" value="${productEdit.productID }">
+                            <input type="text" name="idEdit" style="width: 210px; margin-left: 22px;" value="${productEdit.productID }">
                         </div>
                         <div style="display: flex">
                             <div>Tên sản phẩm:</div> 
-                            <input type="text" style="width: 210px; margin-left: 20px;" value="${productEdit.name }">
+                            <input type="text" name="nameEdit" style="width: 210px; margin-left: 20px;" value="${productEdit.name }">
                         </div>
                     </div>
                     <div class="form-row">
                         <div>Giá tiền:</div>
-                        <input type="text" style="width: 579px" value="${productEdit.price }">
+                        <input type="text" name="priceEdit" style="width: 579px" value="${productEdit.price }">
                     </div>
                     <div class="form-row">
                         <div>Mô tả:</div>
-                        <textarea name="" id="" type="text" cols="74" rows="2" style="resize: none;">${productEdit.shortDescription }</textarea>
+                        <textarea name="shortDescriptionEdit" id="" type="text" cols="74" rows="2" style="resize: none;">${productEdit.shortDescription }</textarea>
                     </div>
                     <div class="form-row" style="justify-content: inherit;">
                         <div >Hình ảnh:</div>
                         <div style="display:flex;">
                             <div style="margin-left: 52px; text-align: left;">
-                                <input id="imgInp" type="file">
-                                <img id="imgProduct" style="height: 160px; width: 200px; margin-bottom: 10px;" src="/assets/img/${productEdit.imageLink }" alt="">
+                                <input id="imgInp"  name="imageLinkEdit" value="${productEdit.imageLink }" type="file">
+                                <img id="imgProduct" style="height: 160px; width: 200px; margin-bottom: 10px;" alt="">
                             </div>
                         </div>
                     </div>
@@ -138,6 +139,7 @@
                     Hoàn tất
                 </button>
             </div>
+        </form>
         </div>
 
     </main>

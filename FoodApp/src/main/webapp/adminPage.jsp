@@ -90,7 +90,7 @@
         <div class="sidebar-sticky pt-3">
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link triv-nav-link active" href="#">
+                    <a class="nav-link triv-nav-link active" href="admin-page">
                         <i class="fas fa-tachometer-alt"></i>
                         Dashboard <span class="sr-only">(current)</span>
                     </a>
@@ -154,7 +154,7 @@
         					<tr class="product-tr">
                             	<th class="product-tr-name" > <c:out value="${product.name}"></c:out> </th>
                             	<th class="product-tr-price" > <c:out value="${product.price }"></c:out> </th>
-                            	<th>Hanoi, VN</th>
+                            	<th> <c:out value="${product.shortDescription}"></c:out> </th>
                             	<th class="product-img"><img class="product-tr-img" src="assets/img/<c:out value="${product.imageLink }"></c:out>" alt=""> </th>
                             	<th>
                                 	<div class="btn-edit-product">

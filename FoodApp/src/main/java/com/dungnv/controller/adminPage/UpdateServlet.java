@@ -23,12 +23,8 @@ public class UpdateServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		doGet(req, resp);
-	}
-	
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String id = req.getParameter("idEdit");
+		System.out.println(id);
 		String name = req.getParameter("nameEdit");
 		Integer price = Integer.valueOf(req.getParameter("priceEdit"));
 		String shortDescription = req.getParameter("shortDescriptionEdit");

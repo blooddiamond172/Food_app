@@ -97,6 +97,7 @@
     <main role="main" id="main" style="margin-left: 0 ;">
         <!-- thêm sản phẩm -->
         <div class="modal js-modal">
+        <form action="insert" method=post>
             <div class="form-product form-edit-product">
                 <a class="form-close js-form-close" href="dashboard.html">
                     <i class="fa-solid fa-xmark"></i>
@@ -127,8 +128,8 @@
                         <div >Hình ảnh:</div>
                         <div style="display:flex;">
                             <div style="margin-left: 52px; text-align: left;">
-                                <input id="imgInp" type="file">
-                                <img id="imgPrpduct" name="imageLink" style="height: 0px; width: 0px; margin-bottom: 10px;" alt="">
+                                <input id="imgInp" name="imageLink" type="file">
+                                <img id="imgPrpduct" style="height: 0px; width: 0px; margin-bottom: 10px;" alt="">
                             </div>
                         </div>
                     </div>
@@ -138,6 +139,7 @@
                     Hoàn tất
                 </button>
             </div>
+            </form>
         </div>
 
     </main>
