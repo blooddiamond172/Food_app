@@ -14,8 +14,6 @@ public class ProductDAO {
 	private static String username = "root";
 	private static String password = "nguyenvandung";
 	
-	private String SELECT_ALL_PRODUCT = 
-			"SELECT * FROM food_app.product;";
 	private String SELECT_PRODUCTS = 
 			"SELECT * FROM food_app.product\r\n"
 			+ "WHERE product_id NOT IN \r\n"
@@ -68,18 +66,31 @@ public class ProductDAO {
 		ArrayList<Product> products = new ArrayList<>();
 		Connection con = getConnection();
 		try {
-			PreparedStatement preparedStatement = con.prepareStatement(SELECT_ALL_PRODUCT);
-			System.out.println(preparedStatement);
-			ResultSet resultSet = preparedStatement.executeQuery();
-			while (resultSet.next()) {
-				String id = resultSet.getString("product_id");
-				String name = resultSet.getString("name");
-				Integer price = resultSet.getInt("price");
-				String imageLink = resultSet.getString("image_link");
-				String shortDescription = resultSet.getString("short_description");
-				Product product = new Product(id,name,price,imageLink,shortDescription);
-				products.add(product);
+			PreparedStatement preparedStatement1 = con.prepareStatement(SELECT_PRODUCTS);
+			PreparedStatement preparedStatement2 = con.prepareStatement(SELECT_ALL_DRINK);
+			System.out.println(preparedStatement1);
+			System.out.println(preparedStatement2);
+			ResultSet resultSet1 = preparedStatement1.executeQuery();
+			ResultSet resultSet2 = preparedStatement2.executeQuery();
+			while (resultSet1.next()) {
+				String id = resultSet1.getString("product_id");
+				String name = resultSet1.getString("name");
+				Integer price = resultSet1.getInt("price");
+				String imageLink = resultSet1.getString("image_link");
+				String shortDescription = resultSet1.getString("short_description");
+				Product product1 = new Product(id,name,price,imageLink,shortDescription);
+				products.add(product1);
 			}
+			while (resultSet2.next()) {
+				String id = resultSet2.getString("product_id");
+				String name = resultSet2.getString("name");
+				Integer price = resultSet2.getInt("price");
+				String imageLink = resultSet2.getString("image_link");
+				String shortDescription = resultSet2.getString("short_description");
+				Product product2 = new Product(id,name,price,imageLink,shortDescription);
+				products.add(product2);
+			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
