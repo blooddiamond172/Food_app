@@ -142,19 +142,21 @@
             <form class="list-product">
                 <table style="width: 100%;" class="">
                     <!-- <input class="search-product" type="search" name="" id="" placeholder="Tìm kiếm ..."> -->
-                        <tr class="search-product-tr" >
-                            <th>Tên Sản Phẩm </th>
-                            <th>Giá tiền </th>
-                            <th>Mô tả </th>
-                            <th class="search-product-tr-img">Hình ảnh</th>
-                            <th colspan="2">Các thao tác </th> 
+                        <tr class="search-product-tr" style="height:50px" >
+                            <th style="width:8%">ID</th>
+                            <th style="width:25%">Tên Sản Phẩm </th>
+                            <th style="width:10%">Giá tiền </th>
+                            <th style="width:30%">Mô tả </th>
+                            <th style="width:15%; padding-left: 10px;">Hình ảnh</th>
+                            <th style="width:12%" colspan="2">Các thao tác </th> 
                         </tr>
         				<c:forEach var="product" items="${listOfProduct }">
         				
         					<tr class="product-tr">
+        						<th class="product-tr-id" > <c:out value="${product.productID}"></c:out> </th>
                             	<th class="product-tr-name" > <c:out value="${product.name}"></c:out> </th>
                             	<th class="product-tr-price" > <c:out value="${product.price }"></c:out> </th>
-                            	<th> <c:out value="${product.shortDescription}"></c:out> </th>
+                            	<th class="product-tr-description"> <c:out value="${product.shortDescription}"></c:out> </th>
                             	<th class="product-img"><img class="product-tr-img" src="assets/img/<c:out value="${product.imageLink }"></c:out>" alt=""> </th>
                             	<th>
                                 	<div class="btn-edit-product">
@@ -169,32 +171,6 @@
                 </table>
             </form> 
         </div>
-        <ul class="sticky-toolbar nav flex-column pl-2 pr-2 pt-3 pb-3 mt-4 d-none d-md-block">
-            <li class="nav-item mb-2" data-toggle="tooltip" title="" data-placement="right"
-                data-original-title="Check out more demos">
-                <button class="btn btn-sm btn-light text-success" type="button">
-                    <i class="fas fa-palette"></i>
-                </button>
-            </li>
-            <li class="nav-item mb-2" data-toggle="tooltip" title="" data-placement="left"
-                data-original-title="Layout Builder">
-                <button class="btn btn-sm btn-light text-primary" type="button">
-                    <i class="fas fa-cog"></i>
-                </button>
-            </li>
-            <li class="nav-item mb-2" data-toggle="tooltip" title="" data-placement="left"
-                data-original-title="Documentation">
-                <button class="btn btn-sm btn-light text-warning" type="button">
-                    <i class="fab fa-telegram"></i>
-                </button>
-            </li>
-            <li class="nav-item" id="kt_sticky_toolbar_chat_toggler" data-toggle="tooltip" title=""
-                data-placement="left" data-original-title="Chat Example">
-                <button class="btn btn-sm btn-light text-danger" type="button">
-                    <i class="fas fa-comment-dots"></i>
-                </button>
-            </li>
-        </ul>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 </html>

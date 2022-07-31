@@ -97,19 +97,27 @@ body {
 }
 .product-tr-img{
     width: 100px;
-    height: auto;
+    height: 100px;
     border-radius: 6px;
     margin: auto;
+    margin: 2px 0;
 }
 .list-product{
     font-size: 16px;
     font-weight: 500;
     color: black;
 }
-.product-tr-name{
+
+.product-tr-id,
+.product-tr-name,
+.product-tr-description{
     font-size: 16px;
     font-weight: 500;
     color: rgb(0, 0, 0);
+}
+
+.product-tr-name{
+	padding-right:20px;
 }
 
 .product-tr-price{
