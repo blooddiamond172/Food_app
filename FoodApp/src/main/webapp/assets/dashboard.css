@@ -220,3 +220,26 @@ body {
         transform: translateY(0);
     }
 }
+
+/* User */
+.list-user{
+    font-size: 16px;
+    font-weight: 500;
+    color: black;
+}
+.search-user-tr {
+    vertical-align: top;
+    height: 40px;
+}
+
+.user-tr-id,
+.user-tr-name,
+.user-tr-password,
+.user-tr-phoneNumber,
+.user-tr-address
+{
+    font-size: 16px;
+    font-weight: 500;
+    color: rgb(0, 0, 0);
+    height: 36px;
+}

@@ -27,7 +27,7 @@ public class UserManagementServlet extends HttpServlet {
 		List<User> users = new ArrayList<>();
 		users = UserDAO.getUsers();
 		req.setAttribute("users", users);
-		req.getRequestDispatcher("adminPage-userManagement.jsp").forward(req, resp);
+		req.getRequestDispatcher("adminPage-user.jsp").forward(req, resp);
 		return;
 	}
 }

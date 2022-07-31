@@ -343,7 +343,7 @@ background-image: url(/assets/img/banner-st.57953e4d.jpg);
 .Price{
     display: flex;
     flex-direction: column;
-    height: 200px;
+    height: 160px;
     justify-content: space-around;
     border-bottom: solid 1px black;
 }

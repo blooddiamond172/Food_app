@@ -33,15 +33,15 @@
 
                     <div>
                         <span class="label">Người nhận</span>
-                        <input class="input" type="text" value="${user.username }" />">
+                        <input class="input" type="text" value="${user.username }" />
                     </div>
                     <div>
                         <span class="label">Số điện thoại</span>
-                        <input class="input" type="text" value="${user.phoneNumber }" />">
+                        <input class="input" type="text" value="${user.phoneNumber }" />
                     </div>
                     <div>
                         <span class="label">Địa chỉ</span> <br>
-                        <input class="input" type="text" value="${user.address }" />">
+                        <input class="input" type="text" value="${user.address }" />
                     </div>
 
                     <div class="checkout-form-return">
