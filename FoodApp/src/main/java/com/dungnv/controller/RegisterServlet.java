@@ -1,6 +1,7 @@
 package com.dungnv.controller;
 
 import java.io.IOException;
+import java.nio.channels.NonReadableChannelException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,31 +24,55 @@ public class RegisterServlet extends HttpServlet {
 	}
 	
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
+			throws ServletException, IOException {
 		String phoneNumber = req.getParameter("phoneNumber");
+		
 		String username = req.getParameter("username");
+		
 		String password = req.getParameter("password");
+		
 		String repassword = req.getParameter("password2");
+		
 		String address = req.getParameter("address");
-		if (password.compareTo(repassword) == 0) {
-			String regex = "[0-9]{8,15}";
-			String reg = "[A-Z][[a-z0-9]+]{8,15}";
-			Pattern pattern = Pattern.compile(regex);
-			Pattern pattern1 = Pattern.compile(reg);
-			Matcher matcher = pattern.matcher(phoneNumber);
-			Matcher matcher1 = pattern1.matcher(password);
-			if (matcher.matches()) {
-				if (matcher1.matches()) {
-					User user = new User(phoneNumber,username,password,address);
-					int result = userDAO.addUser(user);
-					if (result != 0) {
-						req.getRequestDispatcher("index.jsp").forward(req, resp);
-						return;
-					}
-				}
-			}
+		
+		String conditionOfPhoneNumber = "[0-9]{8,15}";
+		
+		String conditionOfPassword = "[A-Z][a-z0-9]{6,9}";
+
+		boolean result1 = checkCondition(phoneNumber, conditionOfPhoneNumber);
+		
+		boolean result2 = checkCondition(password, conditionOfPassword);
+		
+		boolean result3 = checkPassword(password, repassword);
+		
+		User user = null;
+		
+		int resultOfRegister;
+		
+		if (!result1 ||	!result2 || !result3) {
+			resp.sendRedirect("register.jsp");
+			return;
 		}
-		req.getRequestDispatcher("register.jsp").forward(req, resp);
-		return;
+		
+		user = new User(phoneNumber, username, password, address);
+		
+		resultOfRegister = userDAO.addUser(user);
+		
+		if (resultOfRegister == 0) {
+			resp.sendRedirect("register.jsp");
+			return;
+		}
+		
+		resp.sendRedirect("login.jsp");
 	}
+	
+	private boolean checkPassword(String password, String repassword) {
+		return (password.compareTo(repassword) == 0);
+	}
+
+	private boolean checkCondition(String attribute, String condition) {
+		return Pattern.compile(condition).matcher(attribute).matches();
+	}
+	
 }

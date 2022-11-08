@@ -26,42 +26,61 @@ public class UserDAO {
 			+ " VALUE(?,?,?,?);"; 
 	
 	public static Connection getConnection() {
+		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			return DriverManager.getConnection(URL, username, password);
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
+		
 		return null;
 	}
 
 	public ArrayList<User> getUserList(String phone) {
 		ArrayList<User> users = new ArrayList<>();
+		
 		Connection con = getConnection();
+		
+		PreparedStatement preparedStatement; 
+		
+		ResultSet resultSet;
+		
 		try {
-			PreparedStatement preparedStatement = con.prepareStatement(SELECT_USER);
+			preparedStatement = con.prepareStatement(SELECT_USER);
 			preparedStatement.setString(1, phone);
-			System.out.println(preparedStatement);
-			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				Integer userID = resultSet.getInt("user_id");
+				
 				String phoneNumber = resultSet.getString("phone_number");
+				
 				String password = resultSet.getString("password");
+				
 				String username = resultSet.getString("username");
+				
 				String address = resultSet.getString("address");
+				
 				User user = new User(userID,username, password, phoneNumber, address);
+				
 				users.add(user);
 			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 		return users;
 	}
 
 	public int addUser(User user) {
 		Connection con = getConnection();
+		
+		PreparedStatement preparedStatement;
+		
 		try {
-			PreparedStatement preparedStatement = con.prepareStatement(INSERT_USER);
+			preparedStatement = con.prepareStatement(INSERT_USER);
 			preparedStatement.setString(1, user.getUsername());
 			preparedStatement.setString(2, user.getPassword());
 			preparedStatement.setString(3, user.getPhoneNumber());
@@ -71,8 +90,9 @@ public class UserDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 		return 0;
-}
+	}
 
 	public static List<User> getUsers() {
 		Connection con = getConnection();
