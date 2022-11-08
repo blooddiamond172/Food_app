@@ -1,5 +1,6 @@
 package com.dungnv.controller;
 
+import java.awt.PageAttributes;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -14,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sound.midi.Soundbank;
 
+import org.eclipse.jdt.internal.compiler.env.IGenericField;
+
 import com.dungnv.dao.UserDAO;
 import com.dungnv.model.User;
 
@@ -25,35 +28,63 @@ public class LoginServlet extends HttpServlet {
 	public void init() throws ServletException {
 		userDAO = new UserDAO();
 	}
+	
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		ArrayList<User> users = new ArrayList<>();
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
+			throws ServletException, IOException {
 		String phoneNumber = req.getParameter("phoneNumber");
+		
 		String password = req.getParameter("password");
-		String regex1 = "[0-9]{8,15}";
-		String regex2 = "[A-Z][[a-z0-9]+]{8,15}";
-		Pattern pattern1 = Pattern.compile(regex1);
-		Pattern pattern2 = Pattern.compile(regex2);
-		Matcher matcher1 = pattern1.matcher(phoneNumber);
-		Matcher matcher2 = pattern2.matcher(password);
-		if (matcher1.matches() && matcher2.matches()) {
-			if (phoneNumber.equals("1900171717") && password.equals("Admin12345")) {
-				resp.sendRedirect("admin-page");
-				return;
-			} else {
-				users = userDAO.getUserList(phoneNumber);
-				for (User user : users) {
-					if (phoneNumber.equals(user.getPhoneNumber()) && 
-							password.equals(user.getPassword())) {
-						HttpSession httpSession = req.getSession();
-						httpSession.setAttribute("user", user);
-						resp.sendRedirect("index.jsp");
-						return;
-					}
-				}
-				}
+		
+		String conditionOfPhoneNumber = "[0-9]{8,15}";
+		
+		String conditionOfPassword = "[A-Z][a-z0-9]{6,9}";
+		
+		boolean result1 = checkCondition(phoneNumber, conditionOfPhoneNumber);
+		
+		boolean result2 = checkCondition(password, conditionOfPassword);
+		
+		ArrayList<User> users = new ArrayList<>();
+		
+		User user = null; 
+		
+		if (!result1 ||	!result2 ) {
+			resp.sendRedirect("login.jsp");
+			return;
 		}
-		resp.sendRedirect("login.jsp");
+		
+		users = userDAO.getUserList(phoneNumber);
+		if (users.isEmpty()) {
+			resp.sendRedirect("login.jsp");
+			return;
+		}
+		
+		user = validateUser(users, phoneNumber, password);
+		if (user == null) {
+			resp.sendRedirect("login.jsp");
+			return;
+		}
+		
+		req.getSession().setAttribute("user", user);
+		resp.sendRedirect("index.jsp");
 		return;
 	}
+
+	private User validateUser(ArrayList<User> users, 
+							  String phoneNumber, 
+							  String password) {
+		for (User user : users) {
+			if (user.getPhoneNumber().compareTo(phoneNumber) == 0 && 
+				user.getPassword().compareTo(password) == 0) {
+				return user;
+			}
+		}
+		return null;
+	}
+
+	private boolean checkCondition(String attribute, String condition) {
+		return Pattern.compile(condition).matcher(attribute).matches();
+	}
+	
 }
+
