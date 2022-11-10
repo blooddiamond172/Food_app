@@ -18,7 +18,7 @@ public class UserDAO {
 	private static String password = "nguyenvandung";
 	
 	private static String SELECT_USER = 
-			"SELECT * FROM food_app.user WHERE phone_number = ?;";
+			"SELECT * FROM food_app.user WHERE phone_number = ? and password = ?;";
 	private static String SELECT_USERS = 
 			"SELECT * FROM food_app.user;";
 	private static String INSERT_USER = 
@@ -37,41 +37,39 @@ public class UserDAO {
 		return null;
 	}
 
-	public ArrayList<User> getUserList(String phone) {
-		ArrayList<User> users = new ArrayList<>();
-		
+	public User getUser(String phone, String pass) {		
 		Connection con = getConnection();
 		
 		PreparedStatement preparedStatement; 
 		
 		ResultSet resultSet;
-		
+				
 		try {
 			preparedStatement = con.prepareStatement(SELECT_USER);
 			preparedStatement.setString(1, phone);
+			preparedStatement.setString(2, pass);
+			
 			
 			resultSet = preparedStatement.executeQuery();
-			while (resultSet.next()) {
+			if (resultSet.next()) {
 				Integer userID = resultSet.getInt("user_id");
 				
 				String phoneNumber = resultSet.getString("phone_number");
-				
+					
 				String password = resultSet.getString("password");
-				
+					
 				String username = resultSet.getString("username");
-				
+					
 				String address = resultSet.getString("address");
-				
-				User user = new User(userID,username, password, phoneNumber, address);
-				
-				users.add(user);
+					
+				return (new User(userID,username, password, phoneNumber, address));
 			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		return users;
+		return null;
 	}
 
 	public int addUser(User user) {

@@ -43,9 +43,7 @@ public class LoginServlet extends HttpServlet {
 		boolean result1 = checkCondition(phoneNumber, conditionOfPhoneNumber);
 		
 		boolean result2 = checkCondition(password, conditionOfPassword);
-		
-		ArrayList<User> users = new ArrayList<>();
-		
+				
 		User user = null; 
 		
 		if (!result1 ||	!result2 ) {
@@ -53,13 +51,7 @@ public class LoginServlet extends HttpServlet {
 			return;
 		}
 		
-		users = userDAO.getUserList(phoneNumber);
-		if (users.isEmpty()) {
-			resp.sendRedirect("login.jsp");
-			return;
-		}
-		
-		user = validateUser(users, phoneNumber, password);
+		user = userDAO.getUser(phoneNumber, password);
 		if (user == null) {
 			resp.sendRedirect("login.jsp");
 			return;
@@ -68,18 +60,6 @@ public class LoginServlet extends HttpServlet {
 		req.getSession().setAttribute("user", user);
 		resp.sendRedirect("index.jsp");
 		return;
-	}
-
-	private User validateUser(ArrayList<User> users, 
-							  String phoneNumber, 
-							  String password) {
-		for (User user : users) {
-			if (user.getPhoneNumber().compareTo(phoneNumber) == 0 && 
-				user.getPassword().compareTo(password) == 0) {
-				return user;
-			}
-		}
-		return null;
 	}
 
 	private boolean checkCondition(String attribute, String condition) {
