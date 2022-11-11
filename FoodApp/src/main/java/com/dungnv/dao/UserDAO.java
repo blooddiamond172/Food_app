@@ -19,6 +19,8 @@ public class UserDAO {
 	
 	private static String SELECT_USER = 
 			"SELECT * FROM food_app.user WHERE phone_number = ? and password = ?;";
+	private static String SELECT_BY_PHONE_NUMBER = 
+			"SELECT * FROM food_app.user WHERE phone_number = ?;";
 	private static String SELECT_USERS = 
 			"SELECT * FROM food_app.user;";
 	private static String INSERT_USER = 
@@ -113,5 +115,31 @@ public class UserDAO {
 			e.printStackTrace();
 		}
 		return users;
+	}
+
+	public int existOfPhoneNumber(String phoneNumber) {
+		Connection con = getConnection();
+		
+		PreparedStatement preparedStatement;
+		
+		ResultSet resultSet;
+		
+		int result = 0;
+		
+		try {
+			preparedStatement = con.prepareStatement(SELECT_BY_PHONE_NUMBER);
+			preparedStatement.setString(1, phoneNumber);
+			System.out.println(preparedStatement);
+			 
+			resultSet = preparedStatement.executeQuery();
+			if (resultSet.next()) {
+				return 1;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return 0;
 	}
 }

@@ -44,13 +44,21 @@ public class RegisterServlet extends HttpServlet {
 		
 		boolean result2 = checkCondition(password, conditionOfPassword);
 		
-		boolean result3 = checkPassword(password, repassword);
+		boolean result3 = comparePassword(password, repassword);
+		
+		int result4;
 		
 		User user = null;
 		
 		int resultOfRegister;
 		
 		if (!result1 ||	!result2 || !result3) {
+			resp.sendRedirect("register.jsp");
+			return;
+		}
+		
+		result4 = checkExist(phoneNumber);
+		if (result4 == 1) {
 			resp.sendRedirect("register.jsp");
 			return;
 		}
@@ -67,7 +75,11 @@ public class RegisterServlet extends HttpServlet {
 		resp.sendRedirect("login.jsp");
 	}
 	
-	private boolean checkPassword(String password, String repassword) {
+	private int checkExist(String phoneNumber) {
+		return (userDAO.existOfPhoneNumber(phoneNumber));
+	}
+
+	private boolean comparePassword(String password, String repassword) {
 		return (password.compareTo(repassword) == 0);
 	}
 
