@@ -18,8 +18,7 @@ public class GetSearchingServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		ArrayList<Product> products = new ArrayList<>();
 		
-		products = (ArrayList<Product>) getServletContext()
-											.getAttribute("products-of-searching");	
+		products = (ArrayList<Product>) getServletContext().getAttribute("products-of-searching");	
 		req.setAttribute("products", products);
 		req.getRequestDispatcher("order.jsp").forward(req, resp);
 		return;
