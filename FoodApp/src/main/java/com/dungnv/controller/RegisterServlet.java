@@ -66,7 +66,6 @@ public class RegisterServlet extends HttpServlet {
 		user = new User(phoneNumber, username, password, address);
 		
 		resultOfRegister = userDAO.addUser(user);
-		
 		if (resultOfRegister == 0) {
 			resp.sendRedirect("register.jsp");
 			return;

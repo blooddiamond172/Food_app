@@ -28,7 +28,6 @@ public class UserDAO {
 			+ " VALUE(?,?,?,?);"; 
 	
 	public static Connection getConnection() {
-		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			return DriverManager.getConnection(URL, username, password);
@@ -55,15 +54,10 @@ public class UserDAO {
 			resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
 				Integer userID = resultSet.getInt("user_id");
-				
 				String phoneNumber = resultSet.getString("phone_number");
-					
 				String password = resultSet.getString("password");
-					
 				String username = resultSet.getString("username");
-					
 				String address = resultSet.getString("address");
-					
 				return (new User(userID,username, password, phoneNumber, address));
 			}
 			
@@ -85,7 +79,6 @@ public class UserDAO {
 			preparedStatement.setString(2, user.getPassword());
 			preparedStatement.setString(3, user.getPhoneNumber());
 			preparedStatement.setString(4, user.getAddress());
-			System.out.println(preparedStatement);
 			return preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -120,16 +113,15 @@ public class UserDAO {
 	public int existOfPhoneNumber(String phoneNumber) {
 		Connection con = getConnection();
 		
+		int result = 0;
+
 		PreparedStatement preparedStatement;
 		
 		ResultSet resultSet;
-		
-		int result = 0;
-		
+				
 		try {
 			preparedStatement = con.prepareStatement(SELECT_BY_PHONE_NUMBER);
 			preparedStatement.setString(1, phoneNumber);
-			System.out.println(preparedStatement);
 			 
 			resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
