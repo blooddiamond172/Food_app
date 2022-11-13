@@ -13,7 +13,8 @@ public class ProductDAO {
 	private static String URL = "jdbc:mysql://localhost:3306/food_app";
 	private static String username = "root";
 	private static String password = "nguyenvandung";
-	
+	Connection con = getConnection();
+
 	private String SELECT_PRODUCTS = 
 			"SELECT * FROM food_app.product\r\n"
 			+ "WHERE product_id NOT IN \r\n"
@@ -22,7 +23,7 @@ public class ProductDAO {
 	private String SELECT_PRODUCT_BY_ID = 
 			"SELECT * FROM food_app.product WHERE product_id = ?;";
 	private String SELECT_PRODUCT_BY_NAME = 
-			"SELECT * FROM food_app.product WHERE name like N?;";
+			"SELECT * FROM food_app.product WHERE name like ?;";
 	private String SELECT_ALL_BURGER = 
 			"SELECT * FROM food_app.product WHERE name like 'BURGER%';";
 	private String SELECT_ALL_BAKERY = 
@@ -99,11 +100,15 @@ public class ProductDAO {
 	
 	public ArrayList<Product> getProducts() {
 		ArrayList<Product> products = new ArrayList<>();
-		Connection con = getConnection();
+		
+		PreparedStatement preparedStatement;
+		
+		ResultSet resultSet;
+		
 		try {
-			PreparedStatement preparedStatement = con.prepareStatement(SELECT_PRODUCTS);
-			System.out.println(preparedStatement);
-			ResultSet resultSet = preparedStatement.executeQuery();
+			preparedStatement = con.prepareStatement(SELECT_PRODUCTS);
+			
+			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				String id = resultSet.getString("product_id");
 				String name = resultSet.getString("name");
@@ -113,197 +118,126 @@ public class ProductDAO {
 				Product product = new Product(id,name,price,imageLink,shortDescription);
 				products.add(product);
 			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return products;
+	}
+	
+	public ArrayList<Product> SearchProduct(String nameProduct) {
+		ArrayList<Product> products = new ArrayList<>();
+				
+		PreparedStatement preparedStatement;
+		
+		ResultSet resultSet;
+		
+		try {
+			preparedStatement = con.prepareStatement(SELECT_PRODUCT_BY_NAME);
+			preparedStatement.setString(1, nameProduct);
+			
+			resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				String id = resultSet.getString("product_id");
+				
+				String name = resultSet.getString("name");
+				
+				Integer price = resultSet.getInt("price");
+				
+				String imageLink = resultSet.getString("image_link");
+				
+				String shortDescription = resultSet.getString("short_description");
+				
+				Product product = new Product(id,name,price,imageLink,shortDescription);
+				
+				products.add(product);
+			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return products;
 	}
-	
-	public ArrayList<Product> SearchProduct(String name) {
-		ArrayList<Product> products = new ArrayList<>();
+
+	public ArrayList<Product> getCategoriedProducts(String query){
+		ArrayList<Product> categoriedProducts = new ArrayList<>();
+		
 		Connection con = getConnection();
+		
+		PreparedStatement preparedStatement;
+		
+		ResultSet resultSet;
+		
 		try {
-			PreparedStatement preparedStatement = con.prepareStatement(SELECT_PRODUCT_BY_NAME);
-			preparedStatement.setString(1, name);
-			System.out.println(preparedStatement);
-			ResultSet resultSet = preparedStatement.executeQuery();
+			preparedStatement = con.prepareStatement(query);
+			
+			resultSet = preparedStatement.executeQuery();
+			if (!resultSet.next()) {
+				return categoriedProducts;
+			} 
+			
 			while (resultSet.next()) {
 				String id = resultSet.getString("product_id");
-				String nameP = resultSet.getString("name");
+				
+				String name = resultSet.getString("name");
+				
 				Integer price = resultSet.getInt("price");
+				
 				String imageLink = resultSet.getString("image_link");
+				
 				String shortDescription = resultSet.getString("short_description");
-				Product product = new Product(id,nameP,price,imageLink,shortDescription);
-				products.add(product);
+				
+				Product product = new Product(id,name,price,imageLink,shortDescription);
+				
+				categoriedProducts.add(product);
 			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return products;
+		
+		return categoriedProducts;
 	}
 	
 	public ArrayList<Product> getBurgers() {
-		ArrayList<Product> burgers = new ArrayList<>();
-		Connection con = getConnection();
-		try {
-			PreparedStatement preparedStatement = con.prepareStatement(SELECT_ALL_BURGER);
-			System.out.println(preparedStatement);
-			ResultSet resultSet = preparedStatement.executeQuery();
-			while (resultSet.next()) {
-				String id = resultSet.getString("product_id");
-				String name = resultSet.getString("name");
-				Integer price = resultSet.getInt("price");
-				String imageLink = resultSet.getString("image_link");
-				String shortDescription = resultSet.getString("short_description");
-				Product burger = new Product(id,name,price,imageLink,shortDescription);
-				burgers.add(burger);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return burgers;
+		return getCategoriedProducts(SELECT_ALL_BURGER);
 	}
 
 	public ArrayList<Product> getBakerys() {
-		ArrayList<Product> bakerys = new ArrayList<>();
-		Connection con = getConnection();
-		try {
-			PreparedStatement preparedStatement = con.prepareStatement(SELECT_ALL_BAKERY);
-			System.out.println(preparedStatement);
-			ResultSet resultSet = preparedStatement.executeQuery();
-			while (resultSet.next()) {
-				String id = resultSet.getString("product_id");
-				String name = resultSet.getString("name");
-				Integer price = resultSet.getInt("price");
-				String imageLink = resultSet.getString("image_link");
-				String shortDescription = resultSet.getString("short_description");
-				Product bakery = new Product(id,name,price,imageLink,shortDescription);
-				bakerys.add(bakery);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return bakerys;
+		return getCategoriedProducts(SELECT_ALL_BAKERY);
 	}
 
 	public ArrayList<Product> getDrinks() {
-		ArrayList<Product> drinks = new ArrayList<>();
-		Connection con = getConnection();
-		try {
-			PreparedStatement preparedStatement = con.prepareStatement(SELECT_ALL_DRINK);
-			System.out.println(preparedStatement);
-			ResultSet resultSet = preparedStatement.executeQuery();
-			while (resultSet.next()) {
-				String id = resultSet.getString("product_id");
-				String name = resultSet.getString("name");
-				Integer price = resultSet.getInt("price");
-				String imageLink = resultSet.getString("image_link");
-				String shortDescription = resultSet.getString("short_description");
-				Product drink = new Product(id,name,price,imageLink,shortDescription);
-				drinks.add(drink);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return drinks;
+		return getCategoriedProducts(SELECT_ALL_DRINK);
 	}
 
 	public ArrayList<Product> getPizzas() {
-		ArrayList<Product> pizzas = new ArrayList<>();
-		Connection con = getConnection();
-		try {
-			PreparedStatement preparedStatement = con.prepareStatement(SELECT_ALL_PIZZA);
-			System.out.println(preparedStatement);
-			ResultSet resultSet = preparedStatement.executeQuery();
-			while (resultSet.next()) {
-				String id = resultSet.getString("product_id");
-				String name = resultSet.getString("name");
-				Integer price = resultSet.getInt("price");
-				String imageLink = resultSet.getString("image_link");
-				String shortDescription = resultSet.getString("short_description");
-				Product pizza = new Product(id,name,price,imageLink,shortDescription);
-				pizzas.add(pizza);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return pizzas;
+		return getCategoriedProducts(SELECT_ALL_PIZZA);
 	}
 
 	public ArrayList<Product> getKfcs() {
-		ArrayList<Product> kfcs = new ArrayList<>();
-		Connection con = getConnection();
-		try {
-			PreparedStatement preparedStatement = con.prepareStatement(SELECT_ALL_KFC);
-			System.out.println(preparedStatement);
-			ResultSet resultSet = preparedStatement.executeQuery();
-			while (resultSet.next()) {
-				String id = resultSet.getString("product_id");
-				String name = resultSet.getString("name");
-				Integer price = resultSet.getInt("price");
-				String imageLink = resultSet.getString("image_link");
-				String shortDescription = resultSet.getString("short_description");
-				Product kfc = new Product(id,name,price,imageLink,shortDescription);
-				kfcs.add(kfc);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return kfcs;
+		return getCategoriedProducts(SELECT_ALL_KFC);
 	}
 
 	public ArrayList<Product> getListOfProductLower() {
-		ArrayList<Product> products = new ArrayList<>();
-		Connection con = getConnection();
-		try {
-			PreparedStatement preparedStatement = con.prepareStatement(SELECT_PRODUCTS_LOWER);
-			System.out.println(preparedStatement);
-			ResultSet resultSet = preparedStatement.executeQuery();
-			while (resultSet.next()) {
-				String id = resultSet.getString("product_id");
-				String name = resultSet.getString("name");
-				Integer price = resultSet.getInt("price");
-				String imageLink = resultSet.getString("image_link");
-				String shortDescription = resultSet.getString("short_description");
-				Product product = new Product(id,name,price,imageLink,shortDescription);
-				products.add(product);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return products;
+		return getCategoriedProducts(SELECT_PRODUCTS_LOWER);
 	}
 
 	public ArrayList<Product> getListOfProductHigher() {
-		ArrayList<Product> products = new ArrayList<>();
-		Connection con = getConnection();
-		try {
-			PreparedStatement preparedStatement = con.prepareStatement(SELECT_ALL_PRODUCTS_HIGHER);
-			System.out.println(preparedStatement);
-			ResultSet resultSet = preparedStatement.executeQuery();
-			while (resultSet.next()) {
-				String id = resultSet.getString("product_id");
-				String name = resultSet.getString("name");
-				Integer price = resultSet.getInt("price");
-				String imageLink = resultSet.getString("image_link");
-				String shortDescription = resultSet.getString("short_description");
-				Product product = new Product(id,name,price,imageLink,shortDescription);
-				products.add(product);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return products;
+		return getCategoriedProducts(SELECT_ALL_PRODUCTS_HIGHER);
 	}
 
-	public Product getProduct(String id) {
-		Connection con = getConnection();
+	public Product getProduct(String id) {		
 		PreparedStatement preparedStatement;
+		
+		ResultSet resultSet;
+		
 		try {
 			preparedStatement = con.prepareStatement(SELECT_PRODUCT_BY_ID);
 			preparedStatement.setString(1, id);
-			System.out.println(preparedStatement);
-			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				String idP = resultSet.getString("product_id");
 				String name = resultSet.getString("name");
@@ -313,9 +247,11 @@ public class ProductDAO {
 				Product product = new Product(idP,name,price,imageLink,shortDescription);
 				return product;
 			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 		return null;
 	}
 

@@ -22,10 +22,13 @@ public class ProductsServlet extends HttpServlet {
 	}
 	
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
 		ArrayList<Product> products = productDAO.getProducts();
+		
 		req.setAttribute("products", products);
 		req.getRequestDispatcher("order.jsp").forward(req, resp);
 		return;
 	}
+	
 }
