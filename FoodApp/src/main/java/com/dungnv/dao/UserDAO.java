@@ -26,6 +26,7 @@ public class UserDAO {
 	private static String INSERT_USER = 
 			"INSERT INTO food_app.user(username,password,phone_number,address)"
 			+ " VALUE(?,?,?,?);"; 
+	Connection con = getConnection();
 	
 	public static Connection getConnection() {
 		try {
@@ -38,9 +39,7 @@ public class UserDAO {
 		return null;
 	}
 
-	public User getUser(String phone, String pass) {		
-		Connection con = getConnection();
-		
+	public User getUser(String phone, String pass) {				
 		PreparedStatement preparedStatement; 
 		
 		ResultSet resultSet;
@@ -69,8 +68,6 @@ public class UserDAO {
 	}
 
 	public int addUser(User user) {
-		Connection con = getConnection();
-		
 		PreparedStatement preparedStatement;
 		
 		try {
@@ -110,9 +107,7 @@ public class UserDAO {
 		return users;
 	}
 
-	public int existOfPhoneNumber(String phoneNumber) {
-		Connection con = getConnection();
-		
+	public int existOfPhoneNumber(String phoneNumber) {		
 		int result = 0;
 
 		PreparedStatement preparedStatement;
