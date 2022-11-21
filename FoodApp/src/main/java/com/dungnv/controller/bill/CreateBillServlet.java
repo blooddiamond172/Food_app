@@ -34,8 +34,8 @@ public class CreateBillServlet extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		User user = (User) req.getSession().getAttribute("user");
-		Integer userID = user.getUserID();
+		Integer userID = (Integer) req.getServletContext().getAttribute("userID");
+
 		billDAO.createBillID(userID);
 		req.getRequestDispatcher("insert-product-to-bill").forward(req, resp);
 		return;

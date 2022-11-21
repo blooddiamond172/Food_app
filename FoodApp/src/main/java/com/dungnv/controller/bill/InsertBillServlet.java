@@ -31,12 +31,15 @@ public class InsertBillServlet extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		User user = (User) req.getSession().getAttribute("user");
-		Integer userID = user.getUserID();
+		Integer userID = (Integer) req.getServletContext().getAttribute("userID");
+
 		Integer billID = billDAO.getBillID(userID);
-		UserCart userCart = cartDAO.getUserCart(userID);
-		Integer cartID = userCart.getCartID();
+		
+		Integer cartID = (Integer) req.getServletContext().getAttribute("cartID");
+
 		ArrayList<Cart> carts = cartDAO.getCart(cartID);
+		
+		req.getServletContext().setAttribute("billID", billID);
 		billDAO.insertBill(billID,carts,userID);
 		req.getRequestDispatcher("show-bill").forward(req, resp);
 		return;

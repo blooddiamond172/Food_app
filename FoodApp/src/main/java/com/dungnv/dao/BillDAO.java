@@ -17,6 +17,7 @@ public class BillDAO {
 	private static String URL = "jdbc:mysql://localhost:3306/food_app";
 	private static String username = "root";
 	private static String password = "nguyenvandung";
+	Connection con = getConnection();
 	
 	private String SELECT_BILL_ID = 
 			"SELECT * FROM user_bill\r\n"
@@ -59,12 +60,12 @@ public class BillDAO {
 		return 0;
 	}
 
-	public int getBillID(Integer userID) {
-		Connection con = getConnection();
+	public Integer getBillID(Integer userID) {
 		try {
+			ResultSet resultSet;
 			PreparedStatement pre = con.prepareStatement(SELECT_BILL_ID);
 			pre.setInt(1, userID);
-			ResultSet resultSet = pre.executeQuery();
+			resultSet = pre.executeQuery();
 			while (resultSet.next()) {
 				Integer billID = resultSet.getInt("bill_id");
 				return billID;
@@ -96,13 +97,14 @@ public class BillDAO {
 	}
 
 	public ArrayList<Bill> getProductInBill(Integer billID, Integer cartID) {
-		Connection con = getConnection();
 		ArrayList<Bill> bills = new ArrayList<>();
+		
 		try {
+			ResultSet resultSet;
 			PreparedStatement preparedStatement = con.prepareStatement(SELECT_PRODUCT_INFORMATION);
 			preparedStatement.setInt(1, cartID);
 			preparedStatement.setInt(2, billID);
-			ResultSet resultSet = preparedStatement.executeQuery();
+			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				String id = resultSet.getString("product_id");
 				String name = resultSet.getString("name");
@@ -117,6 +119,7 @@ public class BillDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 		return bills;
 	}
 }

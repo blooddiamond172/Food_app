@@ -36,16 +36,32 @@ public class BillServlet extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		User user = (User) req.getSession().getAttribute("user");
-		Integer userID = user.getUserID();
-		Integer billID = billDAO.getBillID(userID);
-		UserCart userCart = cartDAO.getUserCart(userID);
-		Integer cartID = userCart.getCartID();
+		Integer billID = (Integer) req.getServletContext().getAttribute("billID");
+		
+		Integer cartID = (Integer) req.getServletContext().getAttribute("cartID");
+
+		Integer total = (Integer) req.getServletContext().getAttribute("total");
+		
 		ArrayList<Bill> bills = billDAO.getProductInBill(billID,cartID);
-		Integer total = cartDAO.getToTal(cartID);
+		
 		req.setAttribute("total", total);
 		req.setAttribute("bills", bills);
 		req.getRequestDispatcher("bill.jsp").forward(req, resp);
 		return;
 	}
+	
+//	@Override
+//	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//		User user = (User) req.getSession().getAttribute("user");
+//		Integer userID = user.getUserID();
+//		Integer billID = billDAO.getBillID(userID);
+//		UserCart userCart = cartDAO.getUserCart(userID);
+//		Integer cartID = userCart.getCartID();
+//		ArrayList<Bill> bills = billDAO.getProductInBill(billID,cartID);
+//		Integer total = cartDAO.getToTal(cartID);
+//		req.setAttribute("total", total);
+//		req.setAttribute("bills", bills);
+//		req.getRequestDispatcher("bill.jsp").forward(req, resp);
+//		return;
+//	}
 }
