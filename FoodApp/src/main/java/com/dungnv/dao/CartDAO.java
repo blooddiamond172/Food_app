@@ -94,7 +94,6 @@ public class CartDAO {
 			preparedStatement.setString(2, product.getProductID());
 			preparedStatement.setInt(3, 1);
 			preparedStatement.setInt(4, product.getPrice());
-			System.out.println(preparedStatement);
 			return preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -110,6 +109,7 @@ public class CartDAO {
 			ResultSet resultSet;
 			PreparedStatement preparedStatement = con.prepareStatement(SELECT_CART);
 			preparedStatement.setInt(1, cartID);
+			System.out.println(preparedStatement);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				String productID = resultSet.getString("product_id");
@@ -131,41 +131,19 @@ public class CartDAO {
 	}
 
 	public int deleteProductInCart(Integer cartID, String productID) {
-		Connection con = getConnection();
 		ArrayList<Cart> carts = new ArrayList<>();
+		
 		try {
 			PreparedStatement preparedStatement = con.prepareStatement(DELETE_PRODUCT_IN_CART);
 			preparedStatement.setInt(1, cartID);
 			preparedStatement.setString(2, productID);
-			System.out.println(preparedStatement);
 			return preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 		return 0;
 	}
-
-//	public Cart getProductsInCart(Integer cartID) {
-//		try {
-//			PreparedStatement preparedStatement = con.prepareStatement(SELECT_PRODUCT_ID);
-//			preparedStatement.setInt(1, cartID);
-//			preparedStatement.setString(2, productID);
-//			System.out.println(preparedStatement);
-//			ResultSet resultSet = preparedStatement.executeQuery();
-//			while (resultSet.next()) {
-//				String idOfProduct = resultSet.getString("product_id");
-//				Integer quantity = resultSet.getInt("quantity");
-//				Integer price = resultSet.getInt("new_price");
-//				Cart cart = new Cart(cartID,idOfProduct,quantity,price);
-//				return cart;
-//			}
-//			
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//		return null;
-//		
-//	}
 
 	public int updateCart(Integer cartID, Product product) {
 		try {

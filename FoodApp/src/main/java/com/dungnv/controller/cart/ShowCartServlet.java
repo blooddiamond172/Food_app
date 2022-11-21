@@ -30,9 +30,7 @@ public class ShowCartServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException {
-		User user = (User) req.getSession().getAttribute("user");
-		
-		Integer userID;
+		Integer userID = (Integer) req.getServletContext().getAttribute("userID");
 		
 		Integer cartID = (Integer) req.getServletContext().getAttribute("cartID");
 				
@@ -42,20 +40,16 @@ public class ShowCartServlet extends HttpServlet {
 		
 		Integer total;
 	
-		if (user == null) {
+		if (userID == null) {
 			req.getRequestDispatcher("login.jsp").forward(req, resp);
 			return;
 		} 
-		
-		userID = user.getUserID();
-		
+				
 		if (cartID == null) {
 			req.getRequestDispatcher("cart.jsp").forward(req, resp);
 			return;
 		}
-		
-		cartID = cartDAO.getCartID(userID);
-				
+						
 		carts = cartDAO.getCart(cartID);
 			
 		total = cartDAO.getToTal(cartID);

@@ -28,7 +28,7 @@
 			<div class="cart">
 				<ul class="cartWrap">
 					<div class="cartWrap-divcart">
-						<c:forEach var="pd" items="${cart }">
+						<c:forEach var="pd" items="${carts }">
 							<li class="items odd">
 							<div class="infoWrap">
 								<div class="cartSection">
@@ -53,7 +53,7 @@
 									<p class="prodTotals"><c:out value="${pd.newPrice }" /> VNĐ</p>
 								</div>
 								<div class="cartSection removeWrap">
-									<a class="remove" href="delete-product-in-cart?productIDIC=<c:out value="${pd.product.productID }" />&cartID=<c:out value="${pd.cartID }" />">x</a>
+									<a class="remove" href="delete-product-in-cart?productID=<c:out value="${pd.product.productID }" />">x</a>
 								</div>
 							</div>
 						</li>

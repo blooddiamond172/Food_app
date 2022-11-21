@@ -24,7 +24,7 @@ public class DeleteProductCartServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String productID = req.getParameter("productID");
 		
-		Integer cartID = Integer.valueOf(req.getParameter("cartID"));
+		Integer cartID = (Integer) req.getServletContext().getAttribute("cartID");
 				
 		cartDAO.deleteProductInCart(cartID,productID);
 		req.getRequestDispatcher("your-cart").forward(req, resp);

@@ -19,7 +19,6 @@ import com.dungnv.model.UserCart;
 public class AddProductToCartServlet extends HttpServlet {
 	private CartDAO cartDAO;
 	private ProductDAO productDAO;
-	Integer cartID = null;
 	
 	@Override
 	public void init() throws ServletException {
@@ -28,22 +27,20 @@ public class AddProductToCartServlet extends HttpServlet {
 	}
 	
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		User user = (User) req.getSession().getAttribute("user");
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {		
+		Integer userID = (Integer) req.getServletContext().getAttribute("userID");
 		
-		Integer userID;
+		Integer cartID = (Integer) req.getServletContext().getAttribute("cartID");
 						
 		String productID; 
 				
 		int result;
 				
-		if(user == null) {
+		if(userID == null) {
 			req.getRequestDispatcher("login.jsp").forward(req, resp);
 			return;
 		}
-		
-		userID = user.getUserID();
-		
+				
 		if (cartID == null) {
 			cartDAO.createCartID(userID);
 			cartID = cartDAO.getCartID(userID);
