@@ -39,17 +39,12 @@ public class UserDAO {
 		return null;
 	}
 
-	public User getUser(String phone, String pass) {				
-		PreparedStatement preparedStatement; 
-		
-		ResultSet resultSet;
-				
+	public User getUser(String phone, String pass) {										
 		try {
-			preparedStatement = con.prepareStatement(SELECT_USER);
+			ResultSet resultSet;
+			PreparedStatement preparedStatement = con.prepareStatement(SELECT_USER);
 			preparedStatement.setString(1, phone);
 			preparedStatement.setString(2, pass);
-			
-			
 			resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
 				Integer userID = resultSet.getInt("user_id");
