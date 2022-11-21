@@ -122,7 +122,7 @@
             </div>
             </c:forEach>
             <div class="detail-tab-add-comment"> 
-                <form class="detail-tab-user__form" action="add-comment?id=<c:out value="${product.productID }" />" method="post">
+                <form class="detail-tab-user__form" action="post-comment?id=<c:out value="${product.productID }" />" method="post">
                     <textarea name="comment" class="detail-tab-user__textarea" placeholder="Viết bình luận của bạn ở đây..."></textarea>
                         <button class="MuiButtonBase-root MuiButton-root MuiButton-text primary-btn red detail-tab-user__submit" type="submit">
                             <span class="MuiButton-label">Add comment</span>

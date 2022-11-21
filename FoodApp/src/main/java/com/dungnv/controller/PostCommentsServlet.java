@@ -32,12 +32,8 @@ public class PostCommentsServlet extends HttpServlet {
 	}
 	
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		User user = (User) req.getSession().getAttribute("user");
-		
-		boolean result1 = checkSession(user);
-		
-		int userID;
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {		
+		Integer userID = (Integer) req.getServletContext().getAttribute("userID");
 		
 		String productID;
 		
@@ -45,13 +41,11 @@ public class PostCommentsServlet extends HttpServlet {
 		
 		Comment comment;
 		
-		if (result1) {
+		if (userID == null) {
 			resp.sendRedirect("login.jsp");
 			return;
 		}
-		
-		userID = user.getUserID();
-		
+				
 		productID = req.getParameter("id");
 		
 		commentOfUser = req.getParameter("comment");
@@ -62,9 +56,4 @@ public class PostCommentsServlet extends HttpServlet {
 		resp.setHeader("Refresh", "0; URL=" + req.getContextPath() + "/product?id=" + productID);
 		return;
 	}
-
-	private boolean checkSession(User user) {
-		return ((user == null));
-	}
-	
 }

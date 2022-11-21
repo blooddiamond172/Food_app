@@ -114,7 +114,6 @@ public class ProductDAO {
 				Product product = new Product(id,name,price,imageLink,shortDescription);
 				products.add(product);
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -224,15 +223,11 @@ public class ProductDAO {
 		return getCategoriedProducts(SELECT_ALL_PRODUCTS_HIGHER);
 	}
 
-	public Product getProduct(String id) {		
-		PreparedStatement preparedStatement;
-		
-		ResultSet resultSet;
-		
+	public Product getProduct(String id) {				
 		try {
-			preparedStatement = con.prepareStatement(SELECT_PRODUCT_BY_ID);
+			ResultSet resultSet;
+			PreparedStatement preparedStatement = con.prepareStatement(SELECT_PRODUCT_BY_ID);
 			preparedStatement.setString(1, id);
-			
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				String idP = resultSet.getString("product_id");
@@ -242,8 +237,7 @@ public class ProductDAO {
 				String shortDescription = resultSet.getString("short_description");
 				Product product = new Product(idP,name,price,imageLink,shortDescription);
 				return product;
-			}
-			
+			}	
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
