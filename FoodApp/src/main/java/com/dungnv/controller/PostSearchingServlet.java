@@ -28,7 +28,7 @@ public class PostSearchingServlet extends HttpServlet {
 		
 		ArrayList<Product> products = new ArrayList<>();
 		
-		products = productDAO.SearchProduct(name);
+		products = productDAO.searchProduct(name);
 		getServletContext().setAttribute("products-of-searching", products);
 		resp.sendRedirect("get-result");
 		return;

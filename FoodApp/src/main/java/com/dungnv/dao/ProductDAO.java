@@ -121,37 +121,27 @@ public class ProductDAO {
 		return products;
 	}
 	
-	public ArrayList<Product> SearchProduct(String nameProduct) {
+	public ArrayList<Product> searchProduct(String nameProduct) {
 		ArrayList<Product> products = new ArrayList<>();
-				
-		PreparedStatement preparedStatement;
-		
-		ResultSet resultSet;
-		
+								
 		try {
-			preparedStatement = con.prepareStatement(SELECT_PRODUCT_BY_NAME);
+			ResultSet resultSet;
+		 	PreparedStatement preparedStatement = con.prepareStatement(SELECT_PRODUCT_BY_NAME);
 			preparedStatement.setString(1, nameProduct);
-			
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				String id = resultSet.getString("product_id");
-				
 				String name = resultSet.getString("name");
-				
 				Integer price = resultSet.getInt("price");
-				
 				String imageLink = resultSet.getString("image_link");
-				
 				String shortDescription = resultSet.getString("short_description");
-				
 				Product product = new Product(id,name,price,imageLink,shortDescription);
-				
 				products.add(product);
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 		return products;
 	}
 
