@@ -58,6 +58,7 @@ public class LoginServlet extends HttpServlet {
 		}
 		
 		req.getSession().setAttribute("user", user);
+		req.getServletContext().setAttribute("userID", user.getUserID());
 		resp.sendRedirect("index.jsp");
 		return;
 	}
