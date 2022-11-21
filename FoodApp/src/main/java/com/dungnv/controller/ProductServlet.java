@@ -28,11 +28,15 @@ public class ProductServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String id = req.getParameter("id");
+		
 		Product product = productDAO.getProduct(id);
-		req.setAttribute("product", product);
+		
 		ArrayList<Comment> comments = commentDAO.getComments(id);
+		
+		req.setAttribute("product", product);
 		req.setAttribute("comments", comments);
 		req.getRequestDispatcher("product.jsp").forward(req, resp);
 		return;
 	}
+	
 }
