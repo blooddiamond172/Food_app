@@ -22,16 +22,14 @@ public class DeleteProductCartServlet extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String productID = req.getParameter("productIDIC");
+		String productID = req.getParameter("productID");
+		
 		Integer cartID = Integer.valueOf(req.getParameter("cartID"));
-		int res = cartDAO.deleteProductInCart(cartID,productID);
-		if (res!=0) {
-			req.getRequestDispatcher("your-cart").forward(req, resp);
-			return;
-		} else {
-			req.getRequestDispatcher("your-cart").forward(req, resp);
-			return;
-		}
+				
+		cartDAO.deleteProductInCart(cartID,productID);
+		req.getRequestDispatcher("your-cart").forward(req, resp);
+		return;
 	}
+	
 }
 

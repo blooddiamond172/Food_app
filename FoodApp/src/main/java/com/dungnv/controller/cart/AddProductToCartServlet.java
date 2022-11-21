@@ -1,7 +1,6 @@
 package com.dungnv.controller.cart;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,10 +15,11 @@ import com.dungnv.model.Product;
 import com.dungnv.model.User;
 import com.dungnv.model.UserCart;
 
-@WebServlet(urlPatterns = {"/your-cart"})
-public class ShowCartServlet extends HttpServlet {
+@WebServlet(urlPatterns = {"/create-cart"})
+public class AddProductToCartServlet extends HttpServlet {
 	private CartDAO cartDAO;
 	private ProductDAO productDAO;
+	Integer cartID = null;
 	
 	@Override
 	public void init() throws ServletException {
@@ -28,42 +28,45 @@ public class ShowCartServlet extends HttpServlet {
 	}
 	
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		User user = (User) req.getSession().getAttribute("user");
 		
 		Integer userID;
-		
-		Integer cartID = (Integer) req.getServletContext().getAttribute("cartID");
+						
+		String productID; 
 				
-		ArrayList<Cart> carts = new ArrayList<>();
-		
-		ArrayList<Product> products = new ArrayList<>();
-		
-		Integer total;
-	
-		if (user == null) {
+		int result;
+				
+		if(user == null) {
 			req.getRequestDispatcher("login.jsp").forward(req, resp);
 			return;
-		} 
+		}
 		
 		userID = user.getUserID();
 		
 		if (cartID == null) {
-			req.getRequestDispatcher("cart.jsp").forward(req, resp);
-			return;
+			cartDAO.createCartID(userID);
+			cartID = cartDAO.getCartID(userID);
+			req.getServletContext().setAttribute("cartID", cartID);
+		}
+				
+		productID = req.getParameter("idP");
+		
+		Product product = productDAO.getProduct(productID);
+				
+		result = checkExist(cartID, productID);
+		if (result == 1) {
+			cartDAO.updateCart(cartID, product);
+		} else {
+			cartDAO.addProductToCart(cartID, product);
 		}
 		
-		cartID = cartDAO.getCartID(userID);
-				
-		carts = cartDAO.getCart(cartID);
-			
-		total = cartDAO.getToTal(cartID);
-		
-		req.setAttribute("carts", carts);
-		req.setAttribute("total", total);
-		req.getRequestDispatcher("cart.jsp").forward(req, resp);
+		req.getRequestDispatcher("products").forward(req, resp);
 		return;
+	}
+
+	private int checkExist(Integer cartID, String productID) {
+		return (cartDAO.isExist(cartID, productID));
 	}
 	
 }
