@@ -53,9 +53,10 @@ public class ShowCartServlet extends HttpServlet {
 		carts = cartDAO.getCart(cartID);
 			
 		total = cartDAO.getToTal(cartID);
+		req.getServletContext().setAttribute("total", total);
 		
 		req.setAttribute("carts", carts);
-		req.setAttribute("total", total);
+//		req.setAttribute("total", total);
 		req.getRequestDispatcher("cart.jsp").forward(req, resp);
 		return;
 	}
