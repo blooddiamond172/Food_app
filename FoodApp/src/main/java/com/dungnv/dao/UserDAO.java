@@ -39,17 +39,12 @@ public class UserDAO {
 		return null;
 	}
 
-	public User getUser(String phone, String pass) {				
-		PreparedStatement preparedStatement; 
-		
-		ResultSet resultSet;
-				
+	public User getUser(String phone, String pass) {						
 		try {
-			preparedStatement = con.prepareStatement(SELECT_USER);
+			ResultSet resultSet;
+			PreparedStatement preparedStatement = con.prepareStatement(SELECT_USER);
 			preparedStatement.setString(1, phone);
 			preparedStatement.setString(2, pass);
-			
-			
 			resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
 				Integer userID = resultSet.getInt("user_id");
@@ -59,7 +54,6 @@ public class UserDAO {
 				String address = resultSet.getString("address");
 				return (new User(userID,username, password, phoneNumber, address));
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -67,11 +61,9 @@ public class UserDAO {
 		return null;
 	}
 
-	public int addUser(User user) {
-		PreparedStatement preparedStatement;
-		
+	public int addUser(User user) {		
 		try {
-			preparedStatement = con.prepareStatement(INSERT_USER);
+			PreparedStatement preparedStatement = con.prepareStatement(INSERT_USER);
 			preparedStatement.setString(1, user.getUsername());
 			preparedStatement.setString(2, user.getPassword());
 			preparedStatement.setString(3, user.getPhoneNumber());
@@ -110,19 +102,14 @@ public class UserDAO {
 	public int existOfPhoneNumber(String phoneNumber) {		
 		int result = 0;
 
-		PreparedStatement preparedStatement;
-		
-		ResultSet resultSet;
-				
 		try {
-			preparedStatement = con.prepareStatement(SELECT_BY_PHONE_NUMBER);
+			ResultSet resultSet;
+			PreparedStatement preparedStatement = con.prepareStatement(SELECT_BY_PHONE_NUMBER);
 			preparedStatement.setString(1, phoneNumber);
-			 
 			resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
 				return 1;
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
