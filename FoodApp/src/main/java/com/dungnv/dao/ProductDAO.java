@@ -101,13 +101,9 @@ public class ProductDAO {
 	public ArrayList<Product> getProducts() {
 		ArrayList<Product> products = new ArrayList<>();
 		
-		PreparedStatement preparedStatement;
-		
-		ResultSet resultSet;
-		
 		try {
-			preparedStatement = con.prepareStatement(SELECT_PRODUCTS);
-			
+			ResultSet resultSet;
+			PreparedStatement preparedStatement = con.prepareStatement(SELECT_PRODUCTS);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				String id = resultSet.getString("product_id");
