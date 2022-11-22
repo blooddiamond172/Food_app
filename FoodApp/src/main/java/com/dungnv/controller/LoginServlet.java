@@ -46,8 +46,15 @@ public class LoginServlet extends HttpServlet {
 				
 		User user = null; 
 		
+		boolean result3 = checkAccoutAD(phoneNumber,password);
+		
 		if (!result1 ||	!result2 ) {
 			resp.sendRedirect("login.jsp");
+			return;
+		}
+		
+		if (result3) {
+			resp.sendRedirect("admin-page");
 			return;
 		}
 		
@@ -61,6 +68,11 @@ public class LoginServlet extends HttpServlet {
 		req.getServletContext().setAttribute("userID", user.getUserID());
 		resp.sendRedirect("index.jsp");
 		return;
+	}
+
+	private boolean checkAccoutAD(String phoneNumber, String password) {
+		return ((phoneNumber.compareTo("0973171717") == 0) && 
+				(password.compareTo("Admin12345") == 0));
 	}
 
 	private boolean checkCondition(String attribute, String condition) {

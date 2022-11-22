@@ -67,7 +67,7 @@
                             <div class="dropdown">
                                 <a class="nav-link p-3 text-dark font-weight-bold text-muted dropdown-toggle" href="#"
                                 role="button" id="dropdownMenuAccount" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="far fa-user"></i> F7Deat
+                                <i class="far fa-user"></i> Admin
                             </a>
                             <div class="dropdown-menu dropdown-menu-right border-0 shadow"
                                 aria-labelledby="dropdownMenuAccount">
@@ -150,7 +150,7 @@
                             <th style="width:15%; padding-left: 10px;">Hình ảnh</th>
                             <th style="width:12%" colspan="2">Các thao tác </th> 
                         </tr>
-        				<c:forEach var="product" items="${listOfProduct }">
+        				<c:forEach var="product" items="${productsOfAdminPage }">
         				
         					<tr class="product-tr">
         						<th class="product-tr-id" > <c:out value="${product.productID}"></c:out> </th>

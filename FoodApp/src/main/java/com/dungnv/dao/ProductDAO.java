@@ -65,14 +65,14 @@ public class ProductDAO {
 
 	public ArrayList<Product> getProductsOfAdminPage() {
 		ArrayList<Product> products = new ArrayList<>();
-		Connection con = getConnection();
+
 		try {
-			PreparedStatement preparedStatement1 = con.prepareStatement(SELECT_PRODUCTS);
-			PreparedStatement preparedStatement2 = con.prepareStatement(SELECT_ALL_DRINK);
-			System.out.println(preparedStatement1);
-			System.out.println(preparedStatement2);
-			ResultSet resultSet1 = preparedStatement1.executeQuery();
-			ResultSet resultSet2 = preparedStatement2.executeQuery();
+			PreparedStatement preparedStatement1;
+			PreparedStatement preparedStatement2;
+			ResultSet resultSet1;
+			ResultSet resultSet2;
+			preparedStatement1 = con.prepareStatement(SELECT_PRODUCTS);
+			resultSet1 = preparedStatement1.executeQuery();
 			while (resultSet1.next()) {
 				String id = resultSet1.getString("product_id");
 				String name = resultSet1.getString("name");
@@ -82,6 +82,8 @@ public class ProductDAO {
 				Product product1 = new Product(id,name,price,imageLink,shortDescription);
 				products.add(product1);
 			}
+			preparedStatement2 = con.prepareStatement(SELECT_ALL_DRINK);
+			resultSet2 = preparedStatement2.executeQuery();
 			while (resultSet2.next()) {
 				String id = resultSet2.getString("product_id");
 				String name = resultSet2.getString("name");
@@ -95,6 +97,7 @@ public class ProductDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 		return products;
 	}
 	

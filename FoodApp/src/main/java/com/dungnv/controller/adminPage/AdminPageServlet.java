@@ -23,10 +23,12 @@ public class AdminPageServlet extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		ArrayList<Product> listOfProduct = new ArrayList<>();
-		listOfProduct = productDAO.getProductsOfAdminPage();
-		req.setAttribute("listOfProduct", listOfProduct);
+		ArrayList<Product> productsOfAdminPage = new ArrayList<>();
+		
+		productsOfAdminPage = productDAO.getProductsOfAdminPage();
+		req.setAttribute("productsOfAdminPage", productsOfAdminPage);
 		req.getRequestDispatcher("adminPage.jsp").forward(req, resp);
 		return;
 	}
+	
 }
