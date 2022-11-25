@@ -255,23 +255,21 @@ public class ProductDAO {
 		return 0;
 	}
 
-	public boolean checkIDProduct(String productID) {
-		Connection con = getConnection();
-		PreparedStatement preparedStatement;
+	public int checkProductID(String productID) {
 		try {
-			preparedStatement = con.prepareStatement(SELECT_PRODUCT_BY_ID);
+			ResultSet resultSet;
+			PreparedStatement preparedStatement = con.prepareStatement(SELECT_PRODUCT_BY_ID);
 			preparedStatement.setString(1, productID);
 			System.out.println(preparedStatement);
-			ResultSet resultSet = preparedStatement.executeQuery();
+			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
-				String productId = resultSet.getString("product_id");
-				return false;
+				return 1;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return true;
 		
+		return 0;
 	}
 	public int addProduct(Product product) {
 		Connection con = getConnection();
