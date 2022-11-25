@@ -10,13 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(urlPatterns = {"/new"})
 public class NewFormServlet extends HttpServlet {
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		try {
-			req.getRequestDispatcher("adminPage-add.jsp").forward(req, resp);
-			return;
-		} catch (ServletException | IOException e) {
-			e.printStackTrace();
-		}
+		req.getRequestDispatcher("adminPage-add.jsp").forward(req, resp);
+		return;
 	}
+	
 }
