@@ -82,7 +82,7 @@
                 </div>
                 
                 <div class="checkout-btn-order">
-                    <a class="btn-order" href="history-bill" type="submit"><span>Đặt Hàng</span></a>
+                    <button class="btn-order" type="submit"><span>Đặt Hàng</span></button>
                 </div>
             </div>
         </div>

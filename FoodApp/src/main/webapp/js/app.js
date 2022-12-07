@@ -8,7 +8,7 @@ $(function () {
               <li><a href="index.jsp"><i class="fas fa-home"></i>Trang Chủ </a></li>
               <li><a href="products"><i class="fas fa-utensils"></i>Đặt Ngay</a></li>
               <li><a href="index.jsp"><i class="far fa-newspaper"></i>Bảng Tin</a></li>
-              <li><a href="products"><i class="fas fa-store"></i>Cửa Hàng</a></li>
+              <li><a href="history-bill"><i class="fas fa-store"></i>Đơn đặt hàng</a></li>
           </ul>
       </div>   
       <div class="Nav_right">
