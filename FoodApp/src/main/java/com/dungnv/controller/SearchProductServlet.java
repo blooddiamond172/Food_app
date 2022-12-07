@@ -24,8 +24,10 @@ public class SearchProductServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String name = req.getParameter("name-product");
+		
 		ArrayList<Product> products = new ArrayList<>();
-		products = productDAO.SearchProduct(name);
+		
+		products = productDAO.searchProduct(name);
 		req.setAttribute("products", products);
 		resp.sendRedirect("order.jsp");
 	}
