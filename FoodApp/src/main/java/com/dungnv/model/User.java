@@ -6,7 +6,6 @@ import java.util.regex.Pattern;
 
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
 	private Integer userID;
 	private String username;
 	private String password;
@@ -16,47 +15,45 @@ public class User implements Serializable {
 	public User() {
 	}
 
-
-	public User(Integer userID, String username, String phoneNumber, String address) {
-		this.userID = userID;
-		this.username = username;
-		this.phoneNumber = phoneNumber;
-		this.address = address;
-	}
-
-
 	public User(String phoneNumber ,String password) {
 		this.phoneNumber = phoneNumber;
 		this.password = password;
 	}
 	
-
-	public User(Integer userID, String password, String phoneNumber) {
+	public User(Integer userID, 
+			String password, 
+			String phoneNumber) {
+		this(phoneNumber, password);
 		this.userID = userID;
-		this.password = password;
-		this.phoneNumber = phoneNumber;
 	}
 
-
-	public User(Integer userID, String username, 
-			String password, String phoneNumber, 
+	public User(Integer userID,
+			String username, 
+			String phoneNumber, 
 			String address) {
 		this.userID = userID;
 		this.username = username;
-		this.password = password;
 		this.phoneNumber = phoneNumber;
+		this.address = address;
+	}
+
+	public User(String phoneNumber, 
+			String username,
+			String password, 
+			String address) {
+		this(phoneNumber, password);
+		this.username = username;
 		this.address = address;
 	}
 	
-
-	public User(String phoneNumber, String username,
-			String password, String address) {
-		this.phoneNumber = phoneNumber;
-		this.username = username;
+	public User(Integer userID,
+			String username, 
+			String password, 
+			String phoneNumber, 
+			String address) {
+		this(userID, username, phoneNumber, address);
 		this.password = password;
-		this.address = address;
 	}
-
 
 	public Integer getUserID() {
 		return userID;
@@ -93,4 +90,5 @@ public class User implements Serializable {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	
 }
