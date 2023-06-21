@@ -1,4 +1,4 @@
-# Food_app
+# Food-app
 This project helps to better understand way the web work
 
 ## Technologies
