@@ -1,5 +1,5 @@
 # Food-app
-This project helps to better understand way the web work
+This project helps to better understand way the web server work
 
 ## Technologies
 + Java 1.8
